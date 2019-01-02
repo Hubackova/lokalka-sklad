@@ -11,16 +11,18 @@ class Reservation extends Component {
   state = {
     itemNames: [],
     date: new Date(),
-    userName: "",
-    email: "",
-    phoneNumber: "",
+    userId: "",
     returned: false,
-    payed: true
+    payed: false,
+    notification: false
   };
 
-  handleDateChange = date => this.setState({ date });
+  handleDateChange = (date, disabledDates) => {
+    console.warn(date, disabledDates)
+    this.setState({ date })
+  };
 
-  handleSelectItem = itemName => {
+  addItem = itemName => {
     const { itemNames } = this.state;
     if (!itemNames.includes(itemName)) {
       this.setState({ itemNames: [...itemNames, itemName] });
@@ -28,27 +30,41 @@ class Reservation extends Component {
     this.setState({ itemName });
   };
 
+  removeItem = itemName => {
+    const { itemNames } = this.state;
+    this.setState({
+      itemNames: itemNames.filter(i => i !== itemName)
+    })
+  }
+
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  };
+  }
+
+  handleCheck = () => {
+    this.setState({payed: !this.state.payed});
+  }
 
   addReservation = () => {
     const { itemNames, date } = this.state;
+
     const formattedDate = {
       from: moment(date[0]).format("YYYY-MM-DD"),
       to: moment(date[1]).format("YYYY-MM-DD")
     };
     const daysNum = moment(date[1]).diff(date[0], "days");
+
     const addingItems = itemNames.map(i => {
-    const item = itemList.find(j => j.id === i);
-      return {
-        ...this.state,
-        itemName: i,
-        date: formattedDate,
-        daysNum: daysNum,
-        price: item.price*daysNum
-      };
+      const item = itemList.find(j => j.id === i);
+        return {
+          ...this.state,
+          itemName: i,
+          date: formattedDate,
+          daysNum: daysNum,
+          price: item.price*daysNum
+        };
     });
+    this.setState({ payed: false });
     addingItems.forEach(element => reservationsRef.push(element));
   };
 
@@ -58,47 +74,40 @@ class Reservation extends Component {
     const hasItems = itemNames.length > 0
     const items = itemNames.map(i => {
       const item = itemList.find(j => j.id === i)
-      return (<span key={i} className="rentitem">{item.label}</span>)
+      return (<span key={i} className="rentitem">{item.label} <i onClick={() => this.removeItem(i)}>x</i></span>)
     })
     const disabledDates = itemNames.map(i => {
       const items = reservations.filter(j => j.itemName === i)
       return items ? items.map(i => i.date) : []
     })
-    const daysNum = moment(date[1]).diff(date[0], 'days');  
+    const daysNum = moment(date[1]).diff(date[0], 'days');
 
     return (
       <div className="reservation">
-        <ItemSelect handleSelectItem={this.handleSelectItem} />
+        <ItemSelect addItem={this.addItem} />
         {hasItems && <div className="reservation-box">
-        <div className="rent-summary-itemlist" >{items}</div>{JSON.stringify(disabledDates)}
+        <div className="rent-summary-itemlist" >{items}</div>
           <div>
-            <label>Jméno:</label>
+            <label>Id člena:</label>
             <input
-              name="userName"
+              name="userId"
               onChange={this.handleChange}
               value={this.state.userName}
             />
           </div>
           <div>
-            <label>Email:</label>
+            <label>Zaplaceno:</label>
             <input
-              name="email"
-              onChange={this.handleChange}
-              value={this.state.email}
-            />
-          </div>
-          <div>
-            <label>Telefonní číslo:</label>
-            <input
-              name="phoneNumber"
-              onChange={this.handleChange}
-              value={this.state.phoneNumber}
+              name="payed"
+              type="checkbox"
+              onChange={this.handleCheck}
+              checked={this.state.payed}
             />
           </div>
           <div>
             <label>Datum:</label>
             <ItemCalendar
-              handleDateChange={this.handleDateChange}
+              handleDateChange={(date) => this.handleDateChange(date, disabledDates)}
               reservations={reservations}
               itemNames={this.state.itemNames}
               disabledDates={disabledDates}

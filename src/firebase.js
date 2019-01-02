@@ -15,12 +15,7 @@ const firebaseAuth = firebase.auth;
 
 const reservationsRef = ref.child("reservations/");
 
-function removeReservation(key) {
-    reservationsRef.child(key).remove();
-}
-
 const Fb = {
-  removeReservation,
   ref,
   firebaseAuth
 };
