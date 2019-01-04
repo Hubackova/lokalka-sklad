@@ -1,6 +1,6 @@
 import React from "react";
 import "./ItemSelect.scss";
-import { itemList } from "../data/items";
+import { itemList } from "../../data/items";
 
 const ItemSelect = ({ addItem }) => {
   const items = itemList.map(i => (
@@ -8,7 +8,7 @@ const ItemSelect = ({ addItem }) => {
       id={i.id}
       key={i.id}
       className="item-select"
-      onClick={e => addItem(e.target.id)}
+      onClick={addItem}
     >
       {i.label}
       <span className="item-select-price">{i.price},-</span>

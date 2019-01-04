@@ -1,8 +1,10 @@
 .App {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   align-items: center;
+
+  //MENU-GENERAL
   .menu {
     span {
       background-color: dodgerblue;
@@ -31,9 +33,28 @@
       &:hover:before {
         right: 0;
       }
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         color: black;
       }
+    }
+  }
+
+  //ICONS-GENERAL
+  i {
+    color: grey;
+    cursor: pointer;
+    &.success {
+      color: green;
+    }
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+  .remove {
+    &:hover {
+      color: red;
     }
   }
 }

@@ -1,0 +1,10 @@
+
+  .react-calendar__tile:disabled {
+    color: rgb(128, 128, 128);
+  }
+  @media (max-width: 460px) {
+
+    .react-calendar {
+      max-width: 340px;
+    }
+  }

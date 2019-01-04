@@ -1,8 +1,16 @@
 import moment from "moment";
 import Calendar from "react-calendar";
 import React, { Component } from 'react';
+import "./ItemCalendar.scss";
 
 class ItemCalendar extends Component {
+  componentDidMount(){
+    this.props.checkDisableDates(this.props.disabledDates)
+  }
+  componentDidUpdate(){
+    this.props.checkDisableDates(this.props.disabledDates)
+  }
+
   getTileDisabled = ({ date }) => {
     const reserved = this.props.disabledDates.map(i => {
       return i.map(j => {
@@ -11,20 +19,22 @@ class ItemCalendar extends Component {
       })
     })
     return moment(date).add(1, "days") < new Date() || reserved.flat().includes(true);
+    
   };
 
 
   render() {
-    const {handleDateChange, date } = this.props
+    const {handleDateChange, date, invalid } = this.props
     return (
-      <div>
+
       <Calendar
+        className={invalid ? "invalid" : ""}
         onChange={handleDateChange}
         value={date}
         selectRange={true}
         tileDisabled={this.getTileDisabled}
       />
-    </div>
+
     );
   }
 }

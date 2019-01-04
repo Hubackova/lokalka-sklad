@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Reservation from "./components/Reservation";
-import AdminLayout from "./components/AdminLayout";
+import Reservation from "./components/booking";
+import AdminLayout from "./components/manage";
 import { reservationsRef } from "./firebase";
 import "./App.scss";
 import 'font-awesome/css/font-awesome.min.css'
@@ -8,7 +8,8 @@ import 'font-awesome/css/font-awesome.min.css'
 class App extends Component {
   state = {
     isReservation: true,
-    reservations: []
+    reservations: [],
+    admin: false
   };
 
   componentDidMount() {
@@ -25,15 +26,17 @@ class App extends Component {
 
   toReservation = () => this.setState({isReservation: true})
   toAdminLayout = () => this.setState({isReservation: false})
+  adminSwitch = () => this.setState({admin: !this.state.admin})
   render() {
-    const { isReservation, reservations } = this.state;
+    const { isReservation, reservations, admin } = this.state;
     return (
       <div className="App">
         <div className="menu">
           <span onClick={this.toReservation}>Rezervace</span>
-          <span onClick={this.toAdminLayout}>Správa rezervací</span>
+          {admin && <span onClick={this.toAdminLayout}>Správa rezervací</span>}
+          <span ><i onClick={this.adminSwitch} style={{color: admin ? "gold" :"white"}}className="fa fa-user" /></span>
         </div>
-        {isReservation ? <Reservation reservations={reservations}/> : <AdminLayout reservations={reservations} />}
+        {isReservation ? <Reservation reservations={reservations} admin={admin}/> : <AdminLayout reservations={reservations} />}
       </div>
     );
   }
