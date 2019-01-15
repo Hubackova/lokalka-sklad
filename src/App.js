@@ -34,7 +34,7 @@ class App extends Component {
         <div className="menu">
           <span onClick={this.toReservation}>Rezervace</span>
           {admin && <span onClick={this.toAdminLayout}>Správa rezervací</span>}
-          <span ><i onClick={this.adminSwitch} style={{color: admin ? "gold" :"white"}}className="fa fa-user" /></span>
+          <span onClick={this.adminSwitch} ><i className={`fa fa-user${admin ? " admin" : ""}`} /></span>
         </div>
         {isReservation ? <Reservation reservations={reservations} admin={admin}/> : <AdminLayout reservations={reservations} />}
       </div>

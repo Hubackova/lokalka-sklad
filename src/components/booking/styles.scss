@@ -2,14 +2,19 @@ $green: #19cb94;
 
 .reservation {
   display: flex;
+
   min-width: 70vw;
   height: 100%;
   border: 1px solid black;
-  padding: 20px;
-  > div {
-    padding: 20px;
-  }
+
   .reservation-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    @media (max-width: 400px) {
+      padding: 0px;
+    }
     > div {
       margin: 10px;
     }
@@ -30,6 +35,7 @@ $green: #19cb94;
 
   .reserve-button {
     min-height: 40px;
+    max-width: 350px;
     margin: 10px;
     border: 1px solid $green;
     color: $green;
@@ -65,7 +71,7 @@ $green: #19cb94;
       color: $green;
     }
   }
-  @media (max-width: 460px) {
+  @media (max-width: 700px) {
     flex-direction: column;
     width: 100vw;
     padding: 0;

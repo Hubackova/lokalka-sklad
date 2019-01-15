@@ -1,3 +1,5 @@
+$blue: #6db7c4;
+
 .App {
   display: flex;
   flex-direction: column;
@@ -6,8 +8,12 @@
 
   //MENU-GENERAL
   .menu {
+    @media (max-width: 400px) {
+      width: 100%;
+      margin-bottom: 20px;
+    }
     span {
-      background-color: dodgerblue;
+      background-color: $blue;
       color: white;
       padding: 20px;
       display: inline-block;
@@ -17,6 +23,12 @@
       backface-visibility: hidden;
       position: relative;
       overflow: hidden;
+      @media (max-width: 400px) {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 0;
+      }
       &:before {
         content: "";
         position: absolute;
@@ -36,6 +48,15 @@
       &:hover,
       &:focus {
         color: black;
+        i {
+          color: gold;
+        }
+      }
+      i {
+        color: white;
+        &.admin {
+          color: gold;
+        }
       }
     }
   }

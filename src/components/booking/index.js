@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 import moment from "moment";
 import ItemCalendar from "./ItemCalendar";
-import ItemSelect from "./ItemSelect";
+import ItemSelect from "./ItemSelection/ItemSelect";
 import RentSummary from "./RentSummary";
-import "./booking.scss";
+import "./styles.scss";
 import { reservationsRef } from "../../firebase";
-import { itemList } from "../../data/items";
+import { itemList, itemTypes } from "../../data/items";
+import { enumerateDaysBetweenDates } from "../../utils";
 
 class Reservation extends PureComponent {
   state = {
@@ -19,23 +20,13 @@ class Reservation extends PureComponent {
     invalid: false
   };
 
-  enumerateDaysBetweenDates(startDate, endDate) {
-    const currDate = moment(startDate, "YYYY-MM-DD");
-    const lastDate = moment(endDate, "YYYY-MM-DD");
-    let dates = [currDate.toDate()];
-    while (currDate.add(1, "days").diff(lastDate) <= 0) {
-      dates.push(currDate.clone().toDate());
-    }
-    return dates;
-  }
-
   checkDisableDates = disabledDates => {
     const { date } = this.state;
     const startDate = moment(date[0]);
     const endDate = moment(date[1]);
 
     const disabledAll = disabledDates.map(j => {
-      return j.map(i => this.enumerateDaysBetweenDates(i.from, i.to));
+      return j.map(i => enumerateDaysBetweenDates(i.from, i.to));
     });
 
     const disabledAllFlatten = disabledAll.flat(2);
@@ -53,7 +44,8 @@ class Reservation extends PureComponent {
     this.setState({ date });
   };
 
-  addItem = e => {
+  addItem = (e, notAvailable) => {
+    if (notAvailable) return;
     const itemName = e.target.id;
     const { itemNames } = this.state;
     if (!itemNames.includes(itemName)) {
@@ -63,10 +55,15 @@ class Reservation extends PureComponent {
   };
 
   removeItem = itemName => {
-    const { itemNames } = this.state;
-    this.setState({
-      itemNames: itemNames.filter(i => i !== itemName)
-    });
+    this.setState(
+      {
+        itemNames: this.state.itemNames.filter(i => i !== itemName)
+      },
+      () => {
+        if (this.state.itemNames.length === 0)
+          this.setState({ date: new Date() });
+      }
+    );
   };
 
   handleChange = e => {
@@ -75,6 +72,18 @@ class Reservation extends PureComponent {
 
   handleCheck = e => {
     this.setState({ [e.target.name]: !this.state[e.target.name] });
+  };
+
+  getPrice = (i, daysNum) => {
+    const item = itemList.find(j => j.id === i);
+    const itemType = itemTypes.find(type => type.type === item.type);
+    const price =
+      daysNum === 1
+        ? itemType.price1
+        : daysNum < 5
+        ? itemType.price2
+        : itemType.price3;
+    return price;
   };
 
   addReservation = () => {
@@ -86,31 +95,34 @@ class Reservation extends PureComponent {
     const daysNum = moment(date[1]).diff(date[0], "days");
 
     const addingItems = itemNames.map(i => {
-      const item = itemList.find(j => j.id === i);
+      const price = this.getPrice(i, daysNum);
+
       const { invalid, ...newState } = this.state; //get rid of invalid
       return {
         ...newState,
         itemName: i,
         date: formattedDate,
         daysNum: daysNum,
-        price: item.price * daysNum
+        price: price
       };
     });
     this.setState({ payed: false, invalid: false, itemNames: [] });
     addingItems.forEach(element => reservationsRef.push(element));
   };
 
+  selectFirst = () => {};
+
   render() {
-    const { reservations, admin } = this.props;
-    const { itemNames, date } = this.state;
+    const { reservations, admin, selectFirst } = this.props;
+    const { itemNames, date, invalid } = this.state;
     const hasItems = itemNames.length > 0;
     const items = itemNames.map(i => {
       const item = itemList.find(j => j.id === i);
       return (
-        <div key={i} className="rentitem" style={{textAlign: "top"}}>
+        <div key={i} className="rentitem" style={{ textAlign: "top" }}>
           {item.label}
           <i
-            style={{marginLeft: 10}}
+            style={{ marginLeft: 10 }}
             id={i.key}
             onClick={() => this.removeItem(i)}
             className={`fa fa-times-circle remove`}
@@ -126,63 +138,81 @@ class Reservation extends PureComponent {
 
     return (
       <div className="reservation">
-        <ItemSelect addItem={this.addItem} />
-        {hasItems && (
-          <div className="reservation-box">
-            <div className="rent-summary-itemlist">{items}</div>
-            <div>
-              <label>Id člena:</label>
-              <input
-                name="userId"
-                onChange={this.handleChange}
-                value={this.state.userName}
-              />
-            </div>
-            {admin && <div>
-              <label>Zaplaceno:</label>
-              <input
-                name="payed"
-                type="checkbox"
-                onChange={this.handleCheck}
-                checked={this.state.payed}
-              />
-            </div>}
-            {admin && <div>
-              <label>Zapůjčeno:</label>
-              <input
-                name="rent"
-                type="checkbox"
-                onChange={this.handleCheck}
-                checked={this.state.rent}
-              />
-            </div>}
-            <div>
-              <label>Datum:</label>
-              <ItemCalendar
-                handleDateChange={date =>
-                  this.handleDateChange(date, disabledDates)
-                }
-                checkDisableDates={this.checkDisableDates}
-                reservations={reservations}
-                itemNames={this.state.itemNames}
-                disabledDates={disabledDates}
-                date={this.state.date}
-                invalid={this.state.invalid}
-              />
-            </div>
+        <ItemSelect
+          addItem={this.addItem}
+          date={date}
+          reservations={reservations}
+          selectFirst={selectFirst}
+        />
 
-            {!this.state.invalid && Array.isArray(this.state.date) && (
-              <RentSummary summary={this.state} />
-            )}
-            <button
-              onClick={this.addReservation}
-              className="reserve-button"
-              disabled={!daysNum || this.state.invalid}
-            >
-              <i className="fa fa-plus"/>Rezervovat
-            </button>
-          </div>
-        )}
+        <div className="reservation-box">
+          {hasItems ? (
+            <>
+              <div className="rent-summary-itemlist">{items}</div>
+              <div>
+                <label>Id člena:</label>
+                <input
+                  name="userId"
+                  onChange={this.handleChange}
+                  value={this.state.userName}
+                />
+              </div>
+              {admin && (
+                <div>
+                  <label>Zaplaceno:</label>
+                  <input
+                    name="payed"
+                    type="checkbox"
+                    onChange={this.handleCheck}
+                    checked={this.state.payed}
+                  />
+                </div>
+              )}
+              {admin && (
+                <div>
+                  <label>Zapůjčeno:</label>
+                  <input
+                    name="rent"
+                    type="checkbox"
+                    onChange={this.handleCheck}
+                    checked={this.state.rent}
+                  />
+                </div>
+              )}
+              <div>
+                <label>Datum:</label>
+                <ItemCalendar
+                  handleDateChange={this.handleDateChange}
+                  checkDisableDates={this.checkDisableDates}
+                  itemNames={this.state.itemNames}
+                  disabledDates={disabledDates}
+                  date={this.state.date}
+                  invalid={this.state.invalid}
+                />
+              </div>
+              {!this.state.invalid && Array.isArray(this.state.date) && (
+                <RentSummary summary={this.state} getPrice={this.getPrice} />
+              )}
+              <button
+                onClick={this.addReservation}
+                className="reserve-button"
+                disabled={!daysNum || this.state.invalid}
+              >
+                <i className="fa fa-plus" />
+                Rezervovat
+              </button>{" "}
+            </>
+          ) : (
+            <ItemCalendar
+              handleDateChange={this.handleDateChange}
+              checkDisableDates={this.checkDisableDates}
+              itemNames={itemNames}
+              disabledDates={disabledDates}
+              date={date}
+              invalid={invalid}
+            />
+          )}
+        </div>
       </div>
     );
   }

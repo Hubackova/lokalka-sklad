@@ -24,17 +24,16 @@ class ItemCalendar extends Component {
 
 
   render() {
-    const {handleDateChange, date, invalid } = this.props
+    const {handleDateChange, disabledDates, date, invalid } = this.props
     return (
-
       <Calendar
         className={invalid ? "invalid" : ""}
-        onChange={handleDateChange}
+        onChange={date =>
+          handleDateChange(date, disabledDates)}
         value={date}
         selectRange={true}
         tileDisabled={this.getTileDisabled}
       />
-
     );
   }
 }
