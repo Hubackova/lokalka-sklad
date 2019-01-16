@@ -1,4 +1,4 @@
 export const people = [
-  { id: 1234, name: "Lenka Hubáčková", mail: "hubackova.lenka@gmail.com" },
-  { id: 1233, name: "Test Test", mail: "lenka.h@atlas.cz" },
+  { id: "1234", name: "Lenka Hubáčková", mail: "hubackova.lenka@gmail.com" },
+  { id: "1111", name: "Pavel Vrtík", mail: "vrtik.pavel@gmail.com " },
 ];

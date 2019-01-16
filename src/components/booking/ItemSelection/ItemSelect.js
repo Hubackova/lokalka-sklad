@@ -54,7 +54,7 @@ class ItemSelect extends Component {
         ? " notAvailable"
         : "";
       return (
-        <div id={i.id} key={i.id} className={`item-select${bgClass}`} onClick={e => addItem(e, notAvailable)}>
+        <div id={i.id} key={i.id} className={`item-select${bgClass}`} onClick={addItem}>
           {i.label}
         </div>
       );

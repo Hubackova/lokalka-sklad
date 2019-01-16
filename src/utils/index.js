@@ -9,3 +9,28 @@ export function enumerateDaysBetweenDates(startDate, endDate) {
     }
     return dates;
   }
+
+  export function switchName(itemName) {
+    switch (true) {
+      case itemName.includes("ice-axes"):
+        return itemName.replace("ice-axes", "Cepíny");
+      case itemName.includes("crampons-frame"):
+        return itemName.replace("crampons-frame", "Mačky rámové");
+        case itemName.includes("crampons-straps"):
+        return itemName.replace("crampons-straps", "Mačky řemínkové");
+        case itemName.includes("crampons-semi"):
+        return itemName.replace("crampons-semi", "Mačky poloautomaty");
+        case itemName.includes("crampons-plastic"):
+        return itemName.replace("crampons-plastic", "Mačky plast/plast");
+        case itemName.includes("crampons-straps-old"):
+        return itemName.replace("crampons-straps-old", "Mačky řemínkové (staré)");
+      case itemName.includes("shovel"):
+        return itemName.replace("shovel", "Lopata");
+      case itemName.includes("probe"):
+        return itemName.replace("probe", "Sonda");
+      case itemName.includes("beacon"):
+        return itemName.replace("beacon", "Vyhledávač");
+      default:
+        return "";
+    }
+  };

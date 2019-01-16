@@ -6,10 +6,16 @@ import { reservationsRef } from "../../firebase";
 
 function switchName(item) {
   switch (true) {
-    case item.includes("vrtacka"):
-      return ["vrtačky", "vrtačku"];
-    case item.includes("capoeira"):
-      return ["drytoolových bot", "drytoolové boty"];
+    case item.includes("axe"):
+      return ["cepínů", "cepíny"];
+    case item.includes("crampons"):
+      return ["maček", "mačky"];
+      case item.includes("shovel"):
+      return ["lopaty", "lopatu"];
+      case item.includes("probe"):
+      return ["sondy", "sondu"];
+      case item.includes("beacon"):
+      return ["vyhledávače", "vyhledávač"];
     default:
       return "";
   }

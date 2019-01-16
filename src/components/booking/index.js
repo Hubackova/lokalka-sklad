@@ -44,8 +44,7 @@ class Reservation extends PureComponent {
     this.setState({ date });
   };
 
-  addItem = (e, notAvailable) => {
-    if (notAvailable) return;
+  addItem = (e) => {
     const itemName = e.target.id;
     const { itemNames } = this.state;
     if (!itemNames.includes(itemName)) {

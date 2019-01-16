@@ -4,12 +4,12 @@ import { reservationsRef } from "../../firebase";
 import "./manage.scss";
 import MailSender from "./MailSender";
 import SearchBox from "./SearchBox";
+import {switchName} from "../../utils";
 
 class AdminLayout extends Component {
   state = {
     value: "",
-    filtering: false,
-    reservations: this.props.reservations
+    filtering: false
   };
 
   updateReservation = e => {
@@ -21,21 +21,11 @@ class AdminLayout extends Component {
     reservationsRef.child(e.target.id).update({ [attr]: !reservationValue });
   };
 
-  handleChange = e => {
-    const reservations = this.state.reservations.filter(i => {
-      return i.itemName.includes(e.target.value) ||  i.userId.includes(e.target.value);
-    });
-    this.setState({ value: e.target.value, reservations }, () => {
-      if (this.state.value === "") {
-        this.setState({ reservations: this.props.reservations });
-      }
-    });
-
-  };
-
   removeReservation = e => {
     reservationsRef.child(e.target.id).remove();
   };
+
+
 
   getReservationList(reservations, type) {
     const reservationList = reservations.map(i => {
@@ -62,7 +52,7 @@ class AdminLayout extends Component {
               className={`fa fa-times-circle remove`}
             />
           </td>
-          <td>{i.itemName}</td>
+          <td title={switchName(i.itemName)}>{i.itemName}</td>
           <td>{i.userId}</td>
           <td>{moment(i.date.from).format("DD.MM.YY")}</td>
           <td>{moment(i.date.to).format("DD.MM.YY")}</td>
@@ -174,7 +164,7 @@ class AdminLayout extends Component {
   }
 
   render() {
-    const { reservations } = this.state;
+    const { reservations } = this.props;
     const rentedReservations = reservations.filter(
       i => i.rent && (!i.returned || !i.payed)
     );
@@ -186,11 +176,12 @@ class AdminLayout extends Component {
     );
     return (
       <>
-      <SearchBox value={this.state.search} handleChange={this.handleChange} />
-      <div className="admin-layout">
-        
-
-        <div className="reservation-table">
+        <SearchBox
+          value={this.state.search}
+          handleChange={this.props.handleChange}
+        />
+        <div className="admin-layout">
+          <div className="reservation-table">
             <h2>Aktuálně zapůjčeno</h2>
             <table>
               <thead>{this.getReservationHeader("active")}</thead>
@@ -200,7 +191,6 @@ class AdminLayout extends Component {
             </table>
           </div>
 
-
           <div className="reservation-table">
             <h2>Aktuálně rezervováno</h2>
             <table>
@@ -208,7 +198,7 @@ class AdminLayout extends Component {
               <tbody>{this.getReservationList(activeReservations)}</tbody>
             </table>
           </div>
-        
+
           <div className="reservation-table">
             <h2>Archivované rezervace</h2>
             <table>
@@ -218,7 +208,7 @@ class AdminLayout extends Component {
               </tbody>
             </table>
           </div>
-      </div>
+        </div>
       </>
     );
   }

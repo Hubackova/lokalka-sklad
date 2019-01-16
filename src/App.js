@@ -13,6 +13,10 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.fetchReservation()
+  }
+
+  fetchReservation = () => {
     reservationsRef.on("value", snapshot => {
       var items = [];
       snapshot.forEach(child => {
@@ -23,6 +27,17 @@ class App extends Component {
       this.setState({ reservations: items });
     });
   }
+
+  handleChange = e => {
+    const reservations = this.state.reservations.filter(i => {
+      return i.itemName.includes(e.target.value) ||  i.userId.includes(e.target.value);
+    });
+    this.setState({ value: e.target.value, reservations }, () => {
+      if (this.state.value === "") {
+        this.fetchReservation();
+      }
+    });
+  };
 
   toReservation = () => this.setState({isReservation: true})
   toAdminLayout = () => this.setState({isReservation: false})
@@ -36,7 +51,7 @@ class App extends Component {
           {admin && <span onClick={this.toAdminLayout}>Správa rezervací</span>}
           <span onClick={this.adminSwitch} ><i className={`fa fa-user${admin ? " admin" : ""}`} /></span>
         </div>
-        {isReservation ? <Reservation reservations={reservations} admin={admin}/> : <AdminLayout reservations={reservations} />}
+        {isReservation ? <Reservation reservations={reservations} admin={admin}/> : <AdminLayout reservations={reservations} handleChange={this.handleChange}/>}
       </div>
     );
   }
