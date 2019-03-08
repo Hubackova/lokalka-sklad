@@ -62,15 +62,26 @@ class ItemSelect extends Component {
     return items;
   };
 
-  mapTypeAvailability = type => {
+  getItemTypeAvailability = type => {
     const filterType = itemList.filter(i => i.type === type);
     const availableItems = filterType.map(i => {
       const notAvailableArr = this.getAvailabilityArr(i);
       const notAvailable = notAvailableArr && notAvailableArr.includes(true);
       return notAvailable
     })
+    return availableItems
+  }
+
+  mapTypeAvailability = type => {
+    const availableItems = this.getItemTypeAvailability(type)
     const isTypeAvailable = availableItems.some(i => i === false);
     return isTypeAvailable
+  };
+
+  countTypeAvailability = type => {
+    const availableItems = this.getItemTypeAvailability(type)
+    const count = availableItems.filter(i => i === false).length;
+    return count
   };
 
   render() {
@@ -79,12 +90,13 @@ class ItemSelect extends Component {
     const itemLists = itemTypes.map(i => {
       const someAvailable = date.length > 1 && this.mapTypeAvailability(i.type);
       const list = this.mapItems(i.type);
+      const availableItems = date.length > 1 && this.countTypeAvailability(i.type)
       return (
         <ItemsSection
           key={i.type}
           list={list}
           item={i}
-          selectFirst={this.props.selectFirst}
+          availableItems={availableItems}
           someAvailable={someAvailable}
           openType={openType}
           handleOpen={this.handleOpen}

@@ -22,10 +22,10 @@ $darkred: #bc2525;
       background-color: lighten($darkred, 20%);
     }
   }
-
-  .item-select-price {
+  .item-select-number {
     color: grey;
   }
+
   @media (max-width: 460px) {
     min-height: 20px;
     max-width: 100%;
