@@ -1,30 +1,24 @@
-import React, {Component} from 'react'
+import React, {Component, createContext, useState, useContext} from 'react'
+import firebase from 'firebase'
 import Reservation from './components/booking'
 import AdminLayout from './components/manage'
 import LoginForm from './components/auth/LoginForm'
-import firebase from 'firebase'
+import withAuth from './components/auth/withAuth'
 import {reservationsRef, Fb} from './firebase'
 import './App.scss'
 import 'font-awesome/css/font-awesome.min.css'
+
+const UserContext = createContext();
 
 class App extends Component {
   state = {
     isReservation: true,
     reservations: [],
     admin: false,
-    user: null
   }
 
   componentDidMount() {
     this.fetchReservation()
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setState({user})
-        console.log(user)
-      } else {
-        console.log('shit again')
-      }
-    })
   }
 
   fetchReservation = () => {
@@ -58,7 +52,8 @@ class App extends Component {
     return (
       <div className="App">
         <LoginForm />
-        <div>{JSON.stringify(this.state.user && this.state.user.email)}</div>
+
+        <div>{JSON.stringify(this.props.user && this.props.user.email)}</div>
         <div className="menu">
           <span onClick={this.toReservation}>Rezervace</span>
           {admin && <span onClick={this.toAdminLayout}>Správa rezervací</span>}
