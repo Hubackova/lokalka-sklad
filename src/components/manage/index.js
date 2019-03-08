@@ -176,10 +176,10 @@ class AdminLayout extends Component {
     );
     return (
       <>
-        <SearchBox
+        {/* <SearchBox
           value={this.state.search}
           handleChange={this.props.handleChange}
-        />
+        /> */}
         <div className="admin-layout">
           <div className="reservation-table">
             <h2>Aktuálně zapůjčeno</h2>

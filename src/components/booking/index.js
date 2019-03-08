@@ -15,7 +15,7 @@ class Reservation extends PureComponent {
     userId: "",
     returned: false,
     payed: false,
-    rent: this.props.admin ? true : false,
+    rent: this.props.isAdmin ? true : false,
     notification: false,
     invalid: false
   };
@@ -112,7 +112,7 @@ class Reservation extends PureComponent {
   selectFirst = () => {};
 
   render() {
-    const { reservations, admin, selectFirst } = this.props;
+    const { reservations, isAdmin, selectFirst } = this.props;
     const { itemNames, date, invalid } = this.state;
     const hasItems = itemNames.length > 0;
     const items = itemNames.map(i => {
@@ -156,7 +156,7 @@ class Reservation extends PureComponent {
                   value={this.state.userName}
                 />
               </div>
-              {admin && (
+              {isAdmin && (
                 <div>
                   <label>Zaplaceno:</label>
                   <input
@@ -167,7 +167,7 @@ class Reservation extends PureComponent {
                   />
                 </div>
               )}
-              {admin && (
+              {isAdmin && (
                 <div>
                   <label>Zapůjčeno:</label>
                   <input
