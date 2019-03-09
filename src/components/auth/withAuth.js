@@ -6,13 +6,22 @@ import firebase from "firebase";
 import {UserContext} from "../../Contexts";
 
 const withAuth = ({children}) => {
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
-      user ? setUser(user) : setUser(null);
-    });
+  const [authState, setState] = useState({
+    isLoading: true,
+    user: null
   });
-  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged(authState =>
+      setState({ isLoading: false, user: authState })
+    );
+    return unsubscribe;
+  }, [firebase.auth]);
+
+  return <UserContext.Provider value={authState}>{children}</UserContext.Provider>;
 };
 
 export default withAuth;
+
+
+

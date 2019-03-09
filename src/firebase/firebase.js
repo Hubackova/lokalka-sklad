@@ -13,6 +13,6 @@ firebase.initializeApp(config);
 
 const ref = firebase.database().ref();
 const reservationsFb = ref.child("reservations/");
+const usersFb = ref.child("users/");
 
-
-export { reservationsFb };
+export { reservationsFb, usersFb };

@@ -12,9 +12,9 @@ import "font-awesome/css/font-awesome.min.css";
 
 
 const App = () => {
-  const [isAdmin, toggleAdmin] = useState(false);
-  const [reservations, getReservations] = useState([]);
-  const [isReservation, switchReservations] = useState(true);
+  const [isAdmin, setAdmin] = useState(false);
+  const [isReservation, setIsReservation] = useState(true);
+  const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
     reservationsFb.on("value", snapshot => {
@@ -24,7 +24,7 @@ const App = () => {
         childItem.key = child.key;
         items.push(childItem);
       });
-      getReservations(items);
+      setReservations(items);
     });
   }, []);
 
@@ -47,9 +47,9 @@ const App = () => {
         <UserPanel />
 
         <div className="menu">
-          <span onClick={() => switchReservations(true)}>Rezervace</span>
-          {isAdmin && <span onClick={() => switchReservations(false)}>Správa rezervací</span>}
-          <span onClick={() => toggleAdmin(!isAdmin)}>
+          <span onClick={() => setIsReservation(true)}>Rezervace</span>
+          {isAdmin && <span onClick={() => setIsReservation(false)}>Správa rezervací</span>}
+          <span onClick={() => setAdmin(!isAdmin)}>
             <i className={`fa fa-user${isAdmin ? " admin" : ""}`} />
           </span>
         </div>

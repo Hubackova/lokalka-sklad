@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
 import ItemCalendar from "./ItemCalendar";
 import RentSummary from "./RentSummary";
 import { reservationsFb } from "../../firebase/firebase";
+import firebase from "firebase";
 import { itemList, itemTypes } from "../../data/items";
+import {UserContext} from "../../Contexts";
 
 const ReservationForm = ({
   isAdmin,
@@ -15,11 +17,30 @@ const ReservationForm = ({
   checkDisableDates,
   initializeState
 }) => {
+  const {user, isLoading} = useContext(UserContext)
+  if (isLoading) return <div>...loading</div>
+
   const [userSetup, setUserSetup] = useState({ userId: "" });
   const [reservationSetup, setReservationSetup] = useState({
     rent: isAdmin ? true : false,
     payed: false
   });
+  const [userData, setuserData] = useState("Anonymous"); //TODO
+
+  useEffect(() => {
+    !user
+    ? setuserData("Anonymous") //TODO
+    : firebase
+      .database()
+      .ref("/users/" + user.uid)
+      .once("value")
+      .then(snapshot => {
+        const userData = snapshot.val() && snapshot.val().info;
+        setuserData(userData);
+      });
+  });
+
+
   const daysNum = moment(date[1]).diff(date[0], "days");
   const formattedDate = {
     from: moment(date[0]).format("YYYY-MM-DD"),
@@ -49,7 +70,6 @@ const ReservationForm = ({
       };
     });
     initializeState();
-    debugger
     addingItems.forEach(element => reservationsFb.push(element));
   };
 
@@ -60,13 +80,14 @@ const ReservationForm = ({
   });
   return (
     <>
+    {userData && JSON.stringify(userData)}
       {hasItems && (
         <>
           <div>
             <label>Id člena:</label>
             <input
               name="userId"
-              onChange={e => setUserSetup({...userSetup, userId: e.target.value})}
+              onChange={e => setUserSetup({ ...userSetup, userId: e.target.value })}
               value={userSetup.userId}
             />
           </div>

@@ -32,5 +32,5 @@ function saveUser(email, uid, id, phone) {
 export {
   signIn,
   login,
-  logout
+  logout,
 };
