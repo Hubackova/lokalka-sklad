@@ -1,29 +1,32 @@
-import React, {Component, createContext, useState, useEffect, useContext} from 'react'
-import firebase from 'firebase'
-import Reservation from './components/booking'
-import AdminLayout from './components/manage'
-import LoginForm from './components/auth/LoginForm'
-//import withAuth from './components/auth/withAuth'
-import {reservationsRef, Fb} from './firebase'
-import './App.scss'
-import 'font-awesome/css/font-awesome.min.css'
+import React, { useState, useEffect } from "react";
+
+import Reservation from "./components/booking";
+import AdminLayout from "./components/manage";
+import LoginForm from "./components/auth/LoginForm";
+import SignInForm from "./components/auth/SignInForm";
+import WithAuth from "./components/auth/withAuth";
+import UserPanel from "./components/auth/UserPanel";
+import { reservationsFb } from "./firebase/firebase";
+import "./App.scss";
+import "font-awesome/css/font-awesome.min.css";
+
 
 const App = () => {
-  const [isAdmin, toggleAdmin] = useState(false)
-  const [reservations, getReservations] = useState([])
-  const [isReservation, switchReservations] = useState(true)
+  const [isAdmin, toggleAdmin] = useState(false);
+  const [reservations, getReservations] = useState([]);
+  const [isReservation, switchReservations] = useState(true);
 
   useEffect(() => {
-    reservationsRef.on('value', snapshot => {
-      const items = []
+    reservationsFb.on("value", snapshot => {
+      const items = [];
       snapshot.forEach(child => {
-        let childItem = child.val()
-        childItem.key = child.key
-        items.push(childItem)
-      })
-       getReservations(items)
-    })
-  }, [])
+        let childItem = child.val();
+        childItem.key = child.key;
+        items.push(childItem);
+      });
+      getReservations(items);
+    });
+  }, []);
 
   // handleChange = e => {
   //   const reservations = reservations.filter(i => {
@@ -36,27 +39,28 @@ const App = () => {
   //   })
   // }
 
-
   return (
-    <div className="App">
-    <LoginForm />
+    <WithAuth>
+      <div className="App">
+        <LoginForm />
+        <SignInForm />
+        <UserPanel />
 
-    {/* <div>{JSON.stringify(this.props.user && this.props.user.email)}</div> */}
-    <div className="menu">
-      <span onClick={() => switchReservations(true)}>Rezervace</span>
-      {isAdmin && <span onClick={() => switchReservations(false)}>Správa rezervací</span>}
-      <span onClick={() => toggleAdmin(!isAdmin)}>
-        <i className={`fa fa-user${isAdmin ? ' admin' : ''}`} />
-      </span>
-    </div>
-    {isReservation ? (
-      <Reservation reservations={reservations} isAdmin={isAdmin} />
-    ) : (
-      <AdminLayout reservations={reservations}  /> //handleChange={this.handleChange}
-    )}
-  </div>
+        <div className="menu">
+          <span onClick={() => switchReservations(true)}>Rezervace</span>
+          {isAdmin && <span onClick={() => switchReservations(false)}>Správa rezervací</span>}
+          <span onClick={() => toggleAdmin(!isAdmin)}>
+            <i className={`fa fa-user${isAdmin ? " admin" : ""}`} />
+          </span>
+        </div>
+        {isReservation ? (
+          <Reservation reservations={reservations} isAdmin={isAdmin} />
+        ) : (
+          <AdminLayout reservations={reservations} /> //handleChange={this.handleChange}
+        )}
+      </div>
+    </WithAuth>
   );
 };
 
 export default App;
-

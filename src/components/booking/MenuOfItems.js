@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./ItemSelect.scss";
 import moment from "moment";
-import { itemList, itemTypes } from "../../../data/items";
+import { itemList, itemTypes } from "../../data/items";
 import ItemsSection from "./ItemsSection";
-import { enumerateDaysBetweenDates } from "../../../utils";
+import { enumerateDaysBetweenDates } from "../../utils";
 
 const ItemSelect = ({addItem, date, reservations}) => {
   const [openType, setOpen] = useState("")
@@ -60,7 +60,7 @@ const ItemSelect = ({addItem, date, reservations}) => {
     return items;
   };
 
-  const itemLists = itemTypes.map(i => {
+  const itemsSections = itemTypes.map(i => {
     const list = mapItems(i.type);
     const availableItems = date.length > 1 ? countTypeAvailability(i.type) : list.length;
     return (
@@ -77,7 +77,7 @@ const ItemSelect = ({addItem, date, reservations}) => {
   });
 
   return (
-    <div className="items">{itemLists}</div>
+    <div className="items">{itemsSections}</div>
   );
 };
 

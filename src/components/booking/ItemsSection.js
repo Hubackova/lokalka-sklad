@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const ItemsSection = React.memo(
   ({ item, openType, list, dateSelected, availableItems, handleOpen }) => {
-    if (list.length === 1) return list;
+    if (list.length === 1) return list; //case when there is just one item of some type
     const someAvailable = availableItems > 0;
     const availableClass = someAvailable || !dateSelected;
 

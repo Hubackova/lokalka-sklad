@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 
-import {Fb} from '../../firebase'
+import {login, logout} from '../../firebase/functions'
 
 const LoginForm = () => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("hubackova.lenka@gmail.com")
+    const [password, setPassword] = useState("lh603324")
 
-    const login = () => {
-        Fb.login(email, password)
+    const fblogin = () => {
+        login(email, password)
     }
 
-    const logout = () => {
-        Fb.logout()
+    const fblogout = () => {
+        logout()
     }
 
     return (
@@ -19,9 +19,9 @@ const LoginForm = () => {
         <div>
             <input value={email} onChange={e => setEmail(e.target.value)} />
             <input value={password} onChange={e => setPassword(e.target.value)} />
-            <button onClick={login}>Přihlásit</button>
+            <button onClick={fblogin}>Přihlásit</button>
         </div>
-        <button onClick={logout}>Odhlásit</button>
+        <button onClick={fblogout}>Odhlásit</button>
         </>
     );
 };

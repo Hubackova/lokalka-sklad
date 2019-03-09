@@ -1,21 +1,17 @@
 import React, {
-  Component,
-  createContext,
   useState,
   useEffect,
-  useContext
 } from "react";
 import firebase from "firebase";
+import {UserContext} from "../../Contexts";
 
-const withAuth = () => {
+const withAuth = ({children}) => {
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      user ? setUser(user) : console.log("something is wrong");
+      user ? setUser(user) : setUser(null);
     });
-  }, [user]);
-
+  });
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
 

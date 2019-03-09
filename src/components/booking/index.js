@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import moment from "moment";
 import ItemCalendar from "./ItemCalendar";
-import ItemSelect from "./ItemSelection/ItemSelect";
+import ItemSelect from "./MenuOfItems";
 import RentSummary from "./RentSummary";
 import "./styles.scss";
-import { reservationsRef } from "../../firebase";
+import { reservationsFb } from "../../firebase/firebase";
 import { itemList, itemTypes } from "../../data/items";
 import { enumerateDaysBetweenDates } from "../../utils";
 
@@ -106,7 +106,7 @@ class Reservation extends PureComponent {
       };
     });
     this.setState({ payed: false, invalid: false, itemNames: [] });
-    addingItems.forEach(element => reservationsRef.push(element));
+    addingItems.forEach(element => reservationsFb.push(element));
   };
 
   selectFirst = () => {};

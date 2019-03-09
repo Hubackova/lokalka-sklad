@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import SmtpService from "../../SmtpService";
 import { people } from "../../data/people";
-import { reservationsRef } from "../../firebase";
+import { reservationsFb } from "../../firebase/firebase";
 
 function switchName(item) {
   switch (true) {
@@ -48,7 +48,7 @@ function sendMail(i, days) {
 
 function updateReservation(id) {
     const formattedDate = moment().format("YYYY-MM-DD")
-  reservationsRef.child(id).update({ notification: formattedDate });
+    reservationsFb.child(id).update({ notification: formattedDate });
 }
 
 const MailSender = ({ i, color, daysToReturn }) => {

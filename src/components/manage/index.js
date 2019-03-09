@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
-import { reservationsRef } from "../../firebase";
+import { reservationsFb } from "../../firebase/firebase";
 import "./manage.scss";
 import MailSender from "./MailSender";
 import SearchBox from "./SearchBox";
@@ -18,11 +18,11 @@ class AdminLayout extends Component {
     const reservationValue = reservations.find(i => i.key === e.target.id)[
       attr
     ];
-    reservationsRef.child(e.target.id).update({ [attr]: !reservationValue });
+    reservationsFb.child(e.target.id).update({ [attr]: !reservationValue });
   };
 
   removeReservation = e => {
-    reservationsRef.child(e.target.id).remove();
+    reservationsFb.child(e.target.id).remove();
   };
 
 

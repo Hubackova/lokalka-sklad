@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types'
 import moment from "moment";
 import "./RentSummary.scss";
 
@@ -21,5 +22,10 @@ const RentSummary = ({ summary, getPrice }) => {
     </div>
   );
 };
+
+RentSummary.propTypes = {
+  getPrice: PropTypes.func,
+  summary: PropTypes.object
+}
 
 export default RentSummary;
