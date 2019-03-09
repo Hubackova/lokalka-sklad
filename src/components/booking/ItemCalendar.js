@@ -17,13 +17,16 @@ const ItemCalendar = ({ disabledDates, checkDisableDates, handleDateChange, date
   };
 
   return (
-    <Calendar
-      className={invalid ? "invalid" : ""}
-      onChange={date => handleDateChange(date, disabledDates)}
-      value={date}
-      selectRange={true}
-      tileDisabled={getTileDisabled}
-    />
+    <div>
+      <label>Datum:</label>
+      <Calendar
+        className={invalid ? "invalid" : ""}
+        onChange={date => handleDateChange(date, disabledDates)}
+        value={date}
+        selectRange={true}
+        tileDisabled={getTileDisabled}
+      />
+    </div>
   );
 };
 

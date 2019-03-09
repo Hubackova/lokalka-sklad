@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "./ItemSelect.scss";
+import "./MenuOfItems.scss";
 import moment from "moment";
 import { itemList, itemTypes } from "../../data/items";
 import ItemsSection from "./ItemsSection";
 import { enumerateDaysBetweenDates } from "../../utils";
 
-const ItemSelect = ({addItem, date, reservations}) => {
+const MenuOfItems = ({addItem, date, reservations}) => {
   const [openType, setOpen] = useState("")
 
   const handleOpen = e => {
@@ -81,4 +81,4 @@ const ItemSelect = ({addItem, date, reservations}) => {
   );
 };
 
-export default ItemSelect;
+export default MenuOfItems;

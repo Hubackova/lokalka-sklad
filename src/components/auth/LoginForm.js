@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import {login, logout} from '../../firebase/functions'
 
 const LoginForm = () => {
-    const [email, setEmail] = useState("hubackova.lenka@gmail.com")
-    const [password, setPassword] = useState("lh603324")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const fblogin = () => {
         login(email, password)
