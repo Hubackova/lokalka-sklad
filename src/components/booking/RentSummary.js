@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import moment from "moment";
 import "./RentSummary.scss";
 
-const RentSummary = ({ summary, getPrice }) => {
-  const daysNum = moment(summary.date[1]).diff(summary.date[0], "days");
-  const prices = summary.itemNames.map(i => {
+const RentSummary = ({ itemNames, date, getPrice }) => {
+  const daysNum = moment(date[1]).diff(date[0], "days");
+  const prices = itemNames.map(i => {
     return getPrice(i, daysNum)
   });
 
@@ -24,8 +24,9 @@ const RentSummary = ({ summary, getPrice }) => {
 };
 
 RentSummary.propTypes = {
+  date: PropTypes.array,
   getPrice: PropTypes.func,
-  summary: PropTypes.object
+  itemNames: PropTypes.array
 }
 
 export default RentSummary;

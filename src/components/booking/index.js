@@ -190,7 +190,7 @@ class Reservation extends PureComponent {
                 />
               </div>
               {!this.state.invalid && Array.isArray(this.state.date) && (
-                <RentSummary summary={this.state} getPrice={this.getPrice} />
+                <RentSummary itemNames={this.state.itemNames} date={this.state.date} getPrice={this.getPrice} />
               )}
               <button
                 onClick={this.addReservation}
@@ -199,7 +199,7 @@ class Reservation extends PureComponent {
               >
                 <i className="fa fa-plus" />
                 Rezervovat
-              </button>{" "}
+              </button>
             </>
           ) : (
             <ItemCalendar
