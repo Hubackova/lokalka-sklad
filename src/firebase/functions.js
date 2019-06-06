@@ -19,7 +19,6 @@ function signIn(email, password, id, phone) {
 }
 
 function saveUser(email, uid, id, phone) {
-  console.log("saveuser", email, uid, id, phone)
   return firebase.database().ref().child(`users/${uid}/info`)
     .set({
       email,

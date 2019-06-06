@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import moment from "moment";
 import ItemCalendar from "./ItemCalendar";
 import RentSummary from "./RentSummary";
-import { reservationsFb } from "../../firebase/firebase";
-import firebase from "firebase";
+import { reservationsFb, usersFb } from "../../firebase/firebase";
 import { itemList, itemTypes } from "../../data/items";
-import {UserContext} from "../../Contexts";
+import { UserContext } from "../../Contexts";
 
 const ReservationForm = ({
   isAdmin,
@@ -17,29 +16,17 @@ const ReservationForm = ({
   checkDisableDates,
   initializeState
 }) => {
-  const {user, isLoading} = useContext(UserContext)
-  if (isLoading) return <div>...loading</div>
+  const { isAuth, user } = useContext(UserContext);
 
-  const [userSetup, setUserSetup] = useState({ userId: "" });
+  const [userSetup, setUserSetup] = useState({ lokoId: "", phone: "", email: "" });
   const [reservationSetup, setReservationSetup] = useState({
     rent: isAdmin ? true : false,
     payed: false
   });
-  const [userData, setuserData] = useState("Anonymous"); //TODO
 
   useEffect(() => {
-    !user
-    ? setuserData("Anonymous") //TODO
-    : firebase
-      .database()
-      .ref("/users/" + user.uid)
-      .once("value")
-      .then(snapshot => {
-        const userData = snapshot.val() && snapshot.val().info;
-        setuserData(userData);
-      });
-  });
-
+    setUserSetup({ lokoId: user.lokoId, phone: user.phone, email: user.email });
+  }, [user.uid]);
 
   const daysNum = moment(date[1]).diff(date[0], "days");
   const formattedDate = {
@@ -47,14 +34,20 @@ const ReservationForm = ({
     to: moment(date[1]).format("YYYY-MM-DD")
   };
 
-  const getPrice = (i, daysNum) => {
+  function getPrice (i, daysNum) {
     const item = itemList.find(j => j.id === i);
     const itemType = itemTypes.find(type => type.type === item.type);
     const price = daysNum === 1 ? itemType.price1 : daysNum < 5 ? itemType.price2 : itemType.price3;
     return price;
   };
 
-  const addReservation = () => {
+  function updateUser() {
+    const uid = user.uid
+    if (!user.phone) usersFb.child(uid).child("info").update({phone: userSetup.phone})
+    if (!user.lokoId) usersFb.child(uid).child("info").update({lokoId: userSetup.lokoId})
+  }
+
+  function addReservation() {
     const addingItems = itemNames.map(i => {
       const price = getPrice(i, daysNum);
       return {
@@ -70,6 +63,7 @@ const ReservationForm = ({
       };
     });
     initializeState();
+    updateUser()
     addingItems.forEach(element => reservationsFb.push(element));
   };
 
@@ -78,17 +72,28 @@ const ReservationForm = ({
     const items = reservations.filter(j => j.itemName === i);
     return items ? items.map(i => i.date) : [];
   });
+
   return (
     <>
-    {userData && JSON.stringify(userData)}
-      {hasItems && (
+      {user && JSON.stringify(user)}
+      {hasItems && isAuth && (
         <>
           <div>
             <label>Id člena:</label>
             <input
-              name="userId"
-              onChange={e => setUserSetup({ ...userSetup, userId: e.target.value })}
-              value={userSetup.userId}
+              name="lokoId"
+              type="text"
+              onChange={e => setUserSetup({ ...userSetup, lokoId: e.target.value })}
+              value={userSetup.lokoId}
+            />
+          </div>
+          <div>
+            <label>Telefonní číslo:</label>
+            <input
+              name="phone"
+              type="text"
+              onChange={e => setUserSetup({ ...userSetup, phone: e.target.value })}
+              value={userSetup.phone}
             />
           </div>
           {isAdmin && (
@@ -129,7 +134,7 @@ const ReservationForm = ({
       {!invalid && hasItems && Array.isArray(date) && (
         <RentSummary itemNames={itemNames} date={date} getPrice={getPrice} />
       )}
-      {hasItems && (
+      {hasItems && isAuth && (
         <button onClick={addReservation} className="reserve-button" disabled={!daysNum || invalid}>
           <i className="fa fa-plus" />
           Rezervovat

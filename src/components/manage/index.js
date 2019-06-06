@@ -53,7 +53,7 @@ class AdminLayout extends Component {
             />
           </td>
           <td title={switchName(i.itemName)}>{i.itemName}</td>
-          <td>{i.userId}</td>
+          <td>{i.lokoId}</td>
           <td>{moment(i.date.from).format("DD.MM.YY")}</td>
           <td>{moment(i.date.to).format("DD.MM.YY")}</td>
           <td>{i.daysNum}</td>

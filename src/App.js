@@ -4,12 +4,12 @@ import Reservation from "./components/booking";
 import AdminLayout from "./components/manage";
 import LoginForm from "./components/auth/LoginForm";
 import SignInForm from "./components/auth/SignInForm";
-import WithAuth from "./components/auth/withAuth";
+import useAuth from "./components/auth/useAuth";
 import UserPanel from "./components/auth/UserPanel";
 import { reservationsFb } from "./firebase/firebase";
+import { UserContext } from "./Contexts";
 import "./App.scss";
 import "font-awesome/css/font-awesome.min.css";
-
 
 const App = () => {
   const [isAdmin, setAdmin] = useState(false);
@@ -40,7 +40,7 @@ const App = () => {
   // }
 
   return (
-    <WithAuth>
+    <UserContext.Provider value={useAuth()}>
       <div className="App">
         <LoginForm />
         <SignInForm />
@@ -59,7 +59,7 @@ const App = () => {
           <AdminLayout reservations={reservations} /> //handleChange={this.handleChange}
         )}
       </div>
-    </WithAuth>
+    </UserContext.Provider>
   );
 };
 

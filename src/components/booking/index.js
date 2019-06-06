@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import MenuOfItems from "./MenuOfItems";
 import SelectedItems from "./SelectedItems";
@@ -10,6 +10,11 @@ const Reservation = ({ isAdmin, reservations }) => {
   const [itemNames, setItemNames] = useState([]);
   const [date, setDate] = useState(new Date());
   const [invalid, setInvalid] = useState(false);
+  
+  useEffect(() => {
+    if (itemNames.length === 0) setDate(new Date());
+  }, [itemNames.length]);
+
 
   const checkDisableDates = disabledDates => {
     const startDate = moment(date[0]);
@@ -39,9 +44,7 @@ const Reservation = ({ isAdmin, reservations }) => {
   };
 
   const removeItem = itemName => {
-    setItemNames(itemNames.filter(i => i !== itemName), () => {
-      if (itemNames.length === 0) setDate(new Date());
-    });
+    setItemNames(itemNames.filter(i => i !== itemName));
   };
 
   const initializeState = () => {
