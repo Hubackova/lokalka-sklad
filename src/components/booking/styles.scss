@@ -1,17 +1,19 @@
-$green: #19cb94;
+@import '../../colors';
 
 .reservation {
   display: flex;
-
+  flex: 1; 
   min-width: 70vw;
   height: 100%;
-  border: 1px solid black;
+  @media (max-width: 799px) {
+    flex-direction: column;
+  }
 
   .reservation-box {
-    flex: 1;
     display: flex;
     flex-direction: column;
     padding: 20px;
+width: 100%;
     @media (max-width: 400px) {
       padding: 0px;
     }
@@ -71,7 +73,7 @@ $green: #19cb94;
       color: $green;
     }
   }
-  @media (max-width: 700px) {
+  @media (max-width: $mq-medium) {
     flex-direction: column;
     width: 100vw;
     padding: 0;

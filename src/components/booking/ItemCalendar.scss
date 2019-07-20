@@ -2,8 +2,14 @@
   color: rgb(128, 128, 128);
 }
 .react-calendar {
-  width: px;
-  @media (max-width: 400px) {
-    max-width: 280px;
+  width: 100%;
+}
+
+.react-calendar__month-view__days__day {
+  height: 7vw;
+  @media (max-width: 1200px) {
+    width: 2vw;
+    max-width: 2vw;
+    padding: 1vw;
   }
 }

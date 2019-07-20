@@ -1,10 +1,20 @@
-$blue: #6db7c4;
+@import './colors';
 
 .App {
   display: flex;
   flex-direction: column;
-  height: 100%;
   align-items: center;
+  background-color: #5e757e;
+  height: 100%;
+  .main-header {
+    background-color: #5e757e;
+    width: 100%;
+  }
+
+  main {
+    background-color: $white;
+    width:100%;
+  }
 
   //MENU-GENERAL
   .menu {
@@ -53,7 +63,7 @@ $blue: #6db7c4;
         }
       }
       i {
-        color: white;
+        color: $white;
         &.admin {
           color: gold;
         }

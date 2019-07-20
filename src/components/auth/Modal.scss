@@ -1,0 +1,58 @@
+@import '../../colors';
+
+.modal {
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    z-index: 1; 
+    width: 100%; 
+    height: 100%;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    overflow: auto; 
+    padding-top: 80px; 
+}
+/* Modal content */
+.modal-content {
+    background-color: white;
+    width: 70%; 
+    max-width: 640px;
+    height: 40%; 
+    margin: auto; 
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+    @media (max-width: $mq-small) {
+        width: 90%; 
+      }
+}
+/* Close button */
+.close {
+   color: #aaaaaa;
+   float: right;
+   font-size: 25px;
+   font-weight: bold;
+   margin-bottom: 20px;
+}
+.close:hover, 
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+// Form
+.form {
+    margin: 20px;
+    .info-text {
+        color: $mainBackground;
+        margin-bottom: 15px;
+    }
+    .warning-text {
+        color: $darkred;
+    }
+    button {
+        margin: 10px 0;
+        padding: 10px 15px; 
+    }
+}

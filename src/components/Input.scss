@@ -1,0 +1,14 @@
+@import '../colors';
+
+.input {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    label {
+        color: $mainBackground
+    }
+    input {
+        flex: 3;
+        padding: 10px; 
+    }
+}

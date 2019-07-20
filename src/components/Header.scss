@@ -1,0 +1,43 @@
+@import '../colors';
+
+// HEADER-GENERAL
+ 
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    @media (max-width: $mq-medium) {
+        flex-direction: column;
+      }
+  }
+  
+  .main-nav {
+      width: 100%;
+  }
+
+  .main-nav ul {
+    text-align: center;
+    padding: 0;
+  }
+
+  .main-nav li {
+    display: inline-block;
+    padding: 0.5em 1.5em;
+    float: right;
+    color: $white;
+    cursor: pointer;
+    @media (max-width: $mq-medium) {
+        display: block;
+        width: 100%;
+      }
+  }
+
+  // LOGO
+  img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 1vw;
+    @media (max-width: $mq-medium) {
+        margin: 0 auto;
+      }
+  }

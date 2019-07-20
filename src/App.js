@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import Reservation from "./components/booking";
 import AdminLayout from "./components/manage";
-import LoginForm from "./components/auth/LoginForm";
-import SignInForm from "./components/auth/SignInForm";
 import useAuth from "./components/auth/useAuth";
-import UserPanel from "./components/auth/UserPanel";
+import Header from "./components/Header";
 import { reservationsFb } from "./firebase/firebase";
 import { UserContext } from "./Contexts";
 import "./App.scss";
@@ -28,36 +26,18 @@ const App = () => {
     });
   }, []);
 
-  // handleChange = e => {
-  //   const reservations = reservations.filter(i => {
-  //     return i.itemName.includes(e.target.value) || i.userId.includes(e.target.value)
-  //   })
-  //   this.setState({value: e.target.value, reservations}, () => {
-  //     if (this.state.value === '') {
-  //       this.fetchReservation()
-  //     }
-  //   })
-  // }
-
   return (
     <UserContext.Provider value={useAuth()}>
       <div className="App">
-        <LoginForm />
-        <SignInForm />
-        <UserPanel />
-
-        <div className="menu">
-          <span onClick={() => setIsReservation(true)}>Rezervace</span>
-          {isAdmin && <span onClick={() => setIsReservation(false)}>Správa rezervací</span>}
-          <span onClick={() => setAdmin(!isAdmin)}>
-            <i className={`fa fa-user${isAdmin ? " admin" : ""}`} />
-          </span>
-        </div>
-        {isReservation ? (
-          <Reservation reservations={reservations} isAdmin={isAdmin} />
-        ) : (
-          <AdminLayout reservations={reservations} /> //handleChange={this.handleChange}
-        )}
+        <Header isAdmin={isAdmin} setAdmin={setAdmin} setIsReservation={setIsReservation} />
+        <main>
+          <div className="menu" />
+          {isReservation ? (
+            <Reservation reservations={reservations} isAdmin={isAdmin} />
+          ) : (
+            <AdminLayout reservations={reservations} /> //handleChange={this.handleChange}
+          )}
+        </main>
       </div>
     </UserContext.Provider>
   );

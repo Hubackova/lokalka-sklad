@@ -75,7 +75,6 @@ const ReservationForm = ({
 
   return (
     <>
-      {user && JSON.stringify(user)}
       {hasItems && isAuth && (
         <>
           <div>
