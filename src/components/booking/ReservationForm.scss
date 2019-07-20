@@ -1,0 +1,18 @@
+@import '../../colors';
+
+.reservation-submit-panel {
+    display: flex;
+    @media (max-width: $mq-medium) {
+        flex-direction: column;
+      }
+    div {
+        display: flex;
+        align-items: center;
+        margin: 0 10px;
+        flex-wrap: nowrap;
+        label {
+            padding: 0 10px;
+        }
+
+    }
+}

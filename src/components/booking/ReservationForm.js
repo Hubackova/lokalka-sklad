@@ -5,6 +5,7 @@ import RentSummary from "./RentSummary";
 import { reservationsFb, usersFb } from "../../firebase/firebase";
 import { itemList, itemTypes } from "../../data/items";
 import { UserContext } from "../../Contexts";
+import "./ReservationForm.scss";
 
 const ReservationForm = ({
   isAdmin,
@@ -34,17 +35,11 @@ const ReservationForm = ({
     to: moment(date[1]).format("YYYY-MM-DD")
   };
 
-  function getPrice (i, daysNum) {
+  function getPrice(i, daysNum) {
     const item = itemList.find(j => j.id === i);
     const itemType = itemTypes.find(type => type.type === item.type);
     const price = daysNum === 1 ? itemType.price1 : daysNum < 5 ? itemType.price2 : itemType.price3;
     return price;
-  };
-
-  function updateUser() {
-    const uid = user.uid
-    if (!user.phone) usersFb.child(uid).child("info").update({phone: userSetup.phone})
-    if (!user.lokoId) usersFb.child(uid).child("info").update({lokoId: userSetup.lokoId})
   }
 
   function addReservation() {
@@ -63,9 +58,8 @@ const ReservationForm = ({
       };
     });
     initializeState();
-    updateUser()
     addingItems.forEach(element => reservationsFb.push(element));
-  };
+  }
 
   const hasItems = itemNames.length > 0;
   const disabledDates = itemNames.map(i => {
@@ -75,54 +69,6 @@ const ReservationForm = ({
 
   return (
     <>
-      {hasItems && isAuth && (
-        <>
-          <div>
-            <label>Id člena:</label>
-            <input
-              name="lokoId"
-              type="text"
-              onChange={e => setUserSetup({ ...userSetup, lokoId: e.target.value })}
-              value={userSetup.lokoId}
-            />
-          </div>
-          <div>
-            <label>Telefonní číslo:</label>
-            <input
-              name="phone"
-              type="text"
-              onChange={e => setUserSetup({ ...userSetup, phone: e.target.value })}
-              value={userSetup.phone}
-            />
-          </div>
-          {isAdmin && (
-            <div>
-              <label>Zaplaceno:</label>
-              <input
-                name="payed"
-                type="checkbox"
-                onChange={() =>
-                  setReservationSetup({ ...reservationSetup, payed: !reservationSetup.payed })
-                }
-                checked={reservationSetup.payed}
-              />
-            </div>
-          )}
-          {isAdmin && (
-            <div>
-              <label>Zapůjčeno:</label>
-              <input
-                name="rent"
-                type="checkbox"
-                onChange={() =>
-                  setReservationSetup({ ...reservationSetup, rent: !reservationSetup.rent })
-                }
-                checked={reservationSetup.rent}
-              />
-            </div>
-          )}
-        </>
-      )}
       <ItemCalendar
         handleDateChange={handleDateChange}
         checkDisableDates={checkDisableDates}
@@ -134,10 +80,43 @@ const ReservationForm = ({
         <RentSummary itemNames={itemNames} date={date} getPrice={getPrice} />
       )}
       {hasItems && isAuth && (
-        <button onClick={addReservation} className="reserve-button" disabled={!daysNum || invalid}>
-          <i className="fa fa-plus" />
-          Rezervovat
-        </button>
+        <div className="reservation-submit-panel">
+          <button
+            onClick={addReservation}
+            className="reserve-button"
+            disabled={!daysNum || invalid}
+          >
+            <i className="fa fa-plus" />
+            Rezervovat
+          </button>
+
+          {isAdmin && (
+            <>
+              <div>
+                <label>Zaplaceno:</label>
+                <input
+                  name="payed"
+                  type="checkbox"
+                  onChange={() =>
+                    setReservationSetup({ ...reservationSetup, payed: !reservationSetup.payed })
+                  }
+                  checked={reservationSetup.payed}
+                />
+              </div>
+              <div>
+                <label>Zapůjčeno:</label>
+                <input
+                  name="rent"
+                  type="checkbox"
+                  onChange={() =>
+                    setReservationSetup({ ...reservationSetup, rent: !reservationSetup.rent })
+                  }
+                  checked={reservationSetup.rent}
+                />
+              </div>
+            </>
+          )}
+        </div>
       )}
     </>
   );
