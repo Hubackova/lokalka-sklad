@@ -1,4 +1,3 @@
-
 @import '../../colors';
 
 .item-select {
@@ -7,7 +6,7 @@
   justify-content: space-between;
   min-width: 320px;
   min-height: 40px;
-  padding: 10px 25px 10px ;
+  padding: 10px 25px 10px;
   border-bottom: 1px solid grey;
   cursor: pointer;
   background-color: $lightMain;
@@ -28,7 +27,6 @@
   @media (max-width: $mq-large) {
     min-height: 20px;
     max-width: 100%;
-
   }
   @media (max-width: 460px) {
     min-height: 20px;
@@ -43,4 +41,27 @@
     margin: 0;
     padding: 0;
   }
+}
+
+.item-section {
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.item-section::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.item-section::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.item-section::-webkit-scrollbar-thumb
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: $darkMain;
 }
