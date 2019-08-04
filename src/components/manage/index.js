@@ -4,7 +4,9 @@ import { reservationsFb } from "../../firebase/firebase";
 import "./manage.scss";
 import MailSender from "./MailSender";
 import SearchBox from "./SearchBox";
-import {switchName} from "../../utils";
+import { switchName } from "../../utils";
+
+import Table from "./table";
 
 class AdminLayout extends Component {
   state = {
@@ -15,17 +17,13 @@ class AdminLayout extends Component {
   updateReservation = e => {
     const { reservations } = this.props;
     const attr = e.target.getAttribute("name");
-    const reservationValue = reservations.find(i => i.key === e.target.id)[
-      attr
-    ];
+    const reservationValue = reservations.find(i => i.key === e.target.id)[attr];
     reservationsFb.child(e.target.id).update({ [attr]: !reservationValue });
   };
 
   removeReservation = e => {
     reservationsFb.child(e.target.id).remove();
   };
-
-
 
   getReservationList(reservations, type) {
     const reservationList = reservations.map(i => {
@@ -34,15 +32,13 @@ class AdminLayout extends Component {
       const notificationDate = moment(i.notification, "YYYY-MM-DD");
       const daysToReturn = dateTo.diff(dateNow, "days");
       const daysFromNotification = dateNow.diff(notificationDate, "days");
-      const color =
-        daysToReturn > 0 ? "black" : daysToReturn < -10 ? "red" : "orange";
+      const color = daysToReturn > 0 ? "black" : daysToReturn < -10 ? "red" : "orange";
       return (
         <tr
           className="table-row"
           key={i.key}
           style={{
-            backgroundColor:
-              daysFromNotification > 2 ? "#ffe6e6" : "transparent"
+            backgroundColor: daysFromNotification > 2 ? "#ffe6e6" : "transparent"
           }}
         >
           <td>
@@ -91,9 +87,7 @@ class AdminLayout extends Component {
           )}
           {type === "active" && (
             <td>
-              {daysToReturn < 0 && (
-                <MailSender i={i} color={color} daysToReturn={daysToReturn} />
-              )}
+              {daysToReturn < 0 && <MailSender i={i} color={color} daysToReturn={daysToReturn} />}
             </td>
           )}
         </tr>
@@ -165,15 +159,10 @@ class AdminLayout extends Component {
 
   render() {
     const { reservations } = this.props;
-    const rentedReservations = reservations.filter(
-      i => i.rent && (!i.returned || !i.payed)
-    );
-    const activeReservations = reservations.filter(
-      i => !i.rent && (!i.returned || !i.payed)
-    );
-    const archivedReservations = reservations.filter(
-      i => i.returned && i.payed
-    );
+    const rentedReservations = reservations.filter(i => i.rent && (!i.returned || !i.payed));
+    const activeReservations = reservations.filter(i => !i.rent && (!i.returned || !i.payed));
+    const archivedReservations = reservations.filter(i => i.returned && i.payed);
+
     return (
       <>
         {/* <SearchBox
@@ -182,12 +171,22 @@ class AdminLayout extends Component {
         /> */}
         <div className="admin-layout">
           <div className="reservation-table">
+            <Table data={activeReservations} title={"Aktuálně rezervováno"} />
+          </div>
+
+          <div className="reservation-table">
+            <Table data={rentedReservations} title={"Aktuálně zapůjčeno"} />
+          </div>
+
+          <div className="reservation-table">
+            <Table data={archivedReservations} title={"Archivované rezervace"} />
+          </div>
+
+          <div className="reservation-table">
             <h2>Aktuálně zapůjčeno</h2>
             <table>
               <thead>{this.getReservationHeader("active")}</thead>
-              <tbody>
-                {this.getReservationList(rentedReservations, "active")}
-              </tbody>
+              <tbody>{this.getReservationList(rentedReservations, "active")}</tbody>
             </table>
           </div>
 
@@ -203,9 +202,7 @@ class AdminLayout extends Component {
             <h2>Archivované rezervace</h2>
             <table>
               <thead>{this.getReservationHeader("archived")}</thead>
-              <tbody>
-                {this.getReservationList(archivedReservations, "archived")}
-              </tbody>
+              <tbody>{this.getReservationList(archivedReservations, "archived")}</tbody>
             </table>
           </div>
         </div>

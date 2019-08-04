@@ -22,9 +22,9 @@ function switchName(item) {
 }
 
 function sendMail(i, days) {
-  const { key, userId, itemName, date, notification } = i;
+  const { key, lokoId, itemName, date, notification } = i;
   if (notification) return;
-  const mailTo = people.find(i => i.id === userId).mail;
+  const mailTo = people.find(i => i.id === lokoId).mail;
   const itemA = switchName(itemName)[0];
   const itemB = switchName(itemName)[1];
   const sender = new SmtpService();

@@ -21,15 +21,35 @@ const Header = ({ isAdmin, setIsReservation, setAdmin }) => {
 
         <nav className="main-nav">
           <ul className="main-nav-list">
-            {isAuth && <li onClick={() => setIsReservation(true)}>Rezervace</li>}
-            {isAdmin && isAuth && <li onClick={() => setIsReservation(false)}>Správa rezervací</li>}
-            <li onClick={() => setAdmin(!isAdmin)}>
-              <i className={`fa fa-user${isAdmin ? " admin" : ""}`} title={user.email}/>
-            </li>
-            {!isAuth && <li onClick={() => setLoginModal(true)}>Přihlásit se</li>}
-            {!isAuth && <li onClick={() => setRegistrationModal(true)}>Registrovat se</li>}
-            {isAuth && <li onClick={fblogout}>Odhlásit se</li>}
-            <li />
+            {isAuth && (
+              <li onClick={() => setIsReservation(true)}>
+                <span>Rezervace</span>
+                <i className="fa fa-calendar" title={"Rezervace"} />
+              </li>
+            )}
+            {isAuth && (
+              <li onClick={() => setIsReservation(false)}>
+                <span>Správa rezervací</span>
+                <i className="fa fa-list-alt" title={"Správa rezervací"} />
+              </li>
+            )}
+            {isAuth && (
+              <li onClick={fblogout}>
+                <i className="fa fa-sign-out" title={`Odhlásit uživatele ${user.email}`} />
+              </li>
+            )}
+            {!isAuth && (
+              <li onClick={() => setLoginModal(true)}>
+                <span>Přihlásit se</span>
+                <i className="fa fa-user-circle" title={"Přihlásit se"} />
+              </li>
+            )}
+            {!isAuth && (
+              <li onClick={() => setRegistrationModal(true)}>
+                <span>Registrovat se</span>
+                <i className="fa fa-user-plus" title={"Registrovat se"} />
+              </li>
+            )}
           </ul>
         </nav>
       </header>
