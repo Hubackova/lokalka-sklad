@@ -8,7 +8,7 @@ import { reservationsFb } from "./firebase/firebase";
 import { UserContext } from "./Contexts";
 import "./App.scss";
 import "font-awesome/css/font-awesome.min.css";
-
+import Fiotest from "./fiotest";
 const App = () => {
   const [isAdmin, setAdmin] = useState(false);
   const [isReservation, setIsReservation] = useState(true);
@@ -32,6 +32,7 @@ const App = () => {
         <Header isAdmin={isAdmin} setAdmin={setAdmin} setIsReservation={setIsReservation} />
         <main>
           <div className="menu" />
+          <Fiotest />
           {isReservation ? (
             <Reservation reservations={reservations} isAdmin={isAdmin} />
           ) : (
