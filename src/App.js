@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Reservation from "./components/booking";
-import AdminLayout from "./components/manage";
+import Reservations from "./components/reservations";
 import useAuth from "./components/auth/useAuth";
 import Header from "./components/Header";
 import { reservationsFb } from "./firebase/firebase";
@@ -35,7 +35,7 @@ const App = () => {
           {isReservation ? (
             <Reservation reservations={reservations} isAdmin={isAdmin} />
           ) : (
-            <AdminLayout reservations={reservations} /> //handleChange={this.handleChange}
+            <Reservations reservations={reservations} /> //handleChange={this.handleChange}
           )}
         </main>
       </div>

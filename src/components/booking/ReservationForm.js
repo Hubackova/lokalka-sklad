@@ -34,6 +34,7 @@ const ReservationForm = ({
     from: moment(date[0]).format("YYYY-MM-DD"),
     to: moment(date[1]).format("YYYY-MM-DD")
   };
+  const reservationDate = moment(new Date()).format("YYYY-MM-DD")
 
   function getPrice(i, daysNum) {
     const item = itemList.find(j => j.id === i);
@@ -53,6 +54,7 @@ const ReservationForm = ({
         date: formattedDate,
         daysNum: daysNum,
         price: price,
+        reservationDate,
         notification: false,
         returned: false
       };

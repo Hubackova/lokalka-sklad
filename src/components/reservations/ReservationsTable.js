@@ -20,6 +20,7 @@ function Table({ columns, data }) {
     useSortBy
   );
 
+
   return (
     <>
       <table {...getTableProps()}>
@@ -39,33 +40,49 @@ function Table({ columns, data }) {
           ))}
         </thead>
         <tbody>
-          {rows.map(
-            row =>
+          {rows.map(row => {
+            const dateNow = moment(new Date());
+            const notificationDate = moment(row.original.notification, "YYYY-MM-DD");
+            const daysFromNotification = dateNow.diff(notificationDate, "days");
+            return (
               prepareRow(row) || (
-                <tr {...row.getRowProps()} key={row.key}>
+                <tr
+                  {...row.getRowProps()}
+                  key={row.key}
+                  style={{
+                    backgroundColor: daysFromNotification > 2 ? "#ffe6e6" : "transparent"
+                  }}
+                >
                   {row.cells.map(cell => {
                     return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
                   })}
                 </tr>
               )
-          )}
+            );
+          })}
         </tbody>
       </table>
     </>
   );
 }
 
-function App({ data, title }) {
+function App({ reservations, title }) {
+  const data =
+    title === "Aktuálně zapůjčeno"
+      ? reservations.filter(i => i.rent && (!i.returned || !i.payed))
+      : title === "Aktuálně rezervováno"
+      ? reservations.filter(i => !i.rent && (!i.returned || !i.payed))
+      : reservations.filter(i => i.returned && i.payed);
+
   const updateReservation = e => {
     const attr = e.target.getAttribute("name");
-    const reservationValue = data.find(i => i.key === e.target.id)[attr];
+    const reservationValue = data && data.find(i => i.key === e.target.id)[attr];
     reservationsFb.child(e.target.id).update({ [attr]: !reservationValue });
   };
 
   const removeReservation = e => {
     reservationsFb.child(e.target.id).remove();
   };
-  console.log(data);
 
   const getDaysToReturn = dateTo => {
     const dateNow = moment(new Date());
@@ -107,7 +124,8 @@ function App({ data, title }) {
             Header: "Cena",
             accessor: row => `${row.price},-`
           },
-          {show: title !== "Aktuálně rezervováno",
+          {
+            show: title !== "Aktuálně rezervováno",
             Header: "Vráceno",
             accessor: row => (
               <i
@@ -129,7 +147,8 @@ function App({ data, title }) {
               />
             )
           },
-          {show: title === "Aktuálně rezervováno",
+          {
+            show: title === "Aktuálně rezervováno",
             Header: "Zapůjčeno",
             accessor: row => (
               <i
@@ -140,9 +159,18 @@ function App({ data, title }) {
               />
             )
           },
-          {show: title === "Aktuálně zapůjčeno",
+          {
+            show: title === "Aktuálně zapůjčeno",
             Header: "Dnů do vrácení",
-            accessor: row => getDaysToReturn(row.date.to)
+            accessor: row => {
+              const daysToReturn = getDaysToReturn(row.date.to);
+              const color = daysToReturn > 0 ? "black" : daysToReturn < -10 ? "red" : "orange";
+              return (
+                <span style={{ color: color, fontWeight: "bold" }}>
+                  {getDaysToReturn(row.date.to)}
+                </span>
+              );
+            }
           },
           {
             show: title === "Aktuálně zapůjčeno",
