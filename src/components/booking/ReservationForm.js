@@ -6,9 +6,9 @@ import { reservationsFb } from "../../firebase/firebase";
 import { itemList, itemTypes } from "../../data/items";
 import { UserContext } from "../../Contexts";
 import "./ReservationForm.scss";
+import Input from "../Input";
 
 const ReservationForm = ({
-  isAdmin,
   itemNames,
   date,
   invalid,
@@ -19,22 +19,25 @@ const ReservationForm = ({
 }) => {
   const { isAuth, user } = useContext(UserContext);
 
+  const isAdmin =
+    user.uid === "9AmWsb1PbcgIPTynkHvsYco5XLB3" || user.uid === "Xs0w4MJr5xakWA4XBtAVAhawqzI3";
   const [userSetup, setUserSetup] = useState({ phone: "", email: "" });
   const [reservationSetup, setReservationSetup] = useState({
-    rent: isAdmin ? true : false,
+    rent: isAdmin,
     payed: false
   });
 
   useEffect(() => {
-    setUserSetup({ phone: user.phone, email: user.email });
-  }, [user.uid]);
+    setUserSetup({ phone: user.phone, email: isAdmin ? "" : user.email });
+    setReservationSetup({...reservationSetup, rent: isAdmin})
+  }, [user.uid, isAdmin]);
 
-  const daysNum = moment(date[1]).diff(date[0], "days");
+  const daysNum = date[0] ? moment(date[1]).diff(date[0], "days") || 1 : 0;
   const formattedDate = {
     from: moment(date[0]).format("YYYY-MM-DD"),
     to: moment(date[1]).format("YYYY-MM-DD")
   };
-  const reservationDate = moment(new Date()).format("YYYY-MM-DD")
+  const reservationDate = moment(new Date()).format("YYYY-MM-DD");
 
   function getPrice(i, daysNum) {
     const item = itemList.find(j => j.id === i);
@@ -84,7 +87,7 @@ const ReservationForm = ({
       {hasItems && isAuth && (
         <div className="reservation-submit-panel">
           <button
-            onClick={addReservation}
+            onClick={addReservation} //TODO: pokud admin - doplnit tel. číslo!!§
             className="reserve-button"
             disabled={!daysNum || invalid}
           >
@@ -116,6 +119,15 @@ const ReservationForm = ({
                   checked={reservationSetup.rent}
                 />
               </div>
+              <div><label>Email:</label><Input
+                handleChange={e => setUserSetup({ ...userSetup, email: e.target.value })}
+                value={userSetup.email}
+                label=""
+                placeholder=" email toho, kdo si věc půjčuje"
+                type="email"
+                required={true}
+                style={{width: 200}}
+              /></div>
             </>
           )}
         </div>

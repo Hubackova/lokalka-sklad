@@ -9,21 +9,20 @@ function logout() {
   return firebase.auth().signOut()
 }
 
-function signIn(email, password, id, phone) {
+function signIn(email, password, phone) {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((response) => {
       console.log(response)
-      saveUser(email, firebase.auth().currentUser.uid, id, phone)
+      saveUser(email, firebase.auth().currentUser.uid, phone)
     })
     .catch((error) => console.log(error.message))
 }
 
-function saveUser(email, uid, id, phone) {
+function saveUser(email, uid,phone) {
   return firebase.database().ref().child(`users/${uid}/info`)
     .set({
       email,
       uid,
-      id,
       phone
     })
 }

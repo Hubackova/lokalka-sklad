@@ -20,7 +20,6 @@ function Table({ columns, data }) {
     useSortBy
   );
 
-
   return (
     <>
       <table {...getTableProps()}>
@@ -66,7 +65,7 @@ function Table({ columns, data }) {
   );
 }
 
-function App({ reservations, title }) {
+function App({ reservations, title, isAdmin }) {
   const data =
     title === "Aktuálně zapůjčeno"
       ? reservations.filter(i => i.rent && (!i.returned || !i.payed))
@@ -95,9 +94,18 @@ function App({ reservations, title }) {
         Header: title,
         columns: [
           {
+            show: title === "Aktuálně rezervováno" || isAdmin,
             Header: "-",
-            accessor: row => <i id={row.key} key={row.key} onClick={removeReservation} className={`fa fa-trash remove`} />
+            accessor: row => (
+              <i
+                id={row.key}
+                key={row.key}
+                onClick={removeReservation}
+                className={`fa fa-trash remove`}
+              />
+            )
           },
+          { show: isAdmin, Header: "Email", accessor: "email" },
           {
             Header: "Položka",
             accessor: row => switchName(row.itemName)
@@ -119,7 +127,7 @@ function App({ reservations, title }) {
             accessor: row => `${row.price},-`
           },
           {
-            show: title !== "Aktuálně rezervováno",
+            show: title !== "Aktuálně rezervováno" && isAdmin,
             Header: "Vráceno",
             accessor: row => (
               <i
@@ -131,6 +139,7 @@ function App({ reservations, title }) {
             )
           },
           {
+            show: isAdmin,
             Header: "Zaplaceno",
             accessor: row => (
               <i
@@ -142,7 +151,7 @@ function App({ reservations, title }) {
             )
           },
           {
-            show: title === "Aktuálně rezervováno",
+            show: title === "Aktuálně rezervováno" && isAdmin,
             Header: "Zapůjčeno",
             accessor: row => (
               <i
@@ -167,7 +176,7 @@ function App({ reservations, title }) {
             }
           },
           {
-            show: title === "Aktuálně zapůjčeno",
+            show: title === "Aktuálně zapůjčeno" && isAdmin,
             Header: "!",
             accessor: row => {
               const daysToReturn = getDaysToReturn(row.date.to);

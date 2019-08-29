@@ -7,11 +7,10 @@ import Input from "../Input";
 const SignInForm = ({ setRegistrationModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [id, setId] = useState("");
   const [phone, setPhone] = useState("");
 
   const fbSignIn = async () => {
-    await signIn(email, password, id, phone)
+    await signIn(email, password, phone)
     setRegistrationModal(false)
   };
 
@@ -40,7 +39,6 @@ const SignInForm = ({ setRegistrationModal }) => {
             label="Heslo"
             required={true}
           />
-          <Input handleChange={e => setId(e.target.value)} value={id} label="ID" required={true} />
           <Input
             handleChange={e => setPhone(e.target.value)}
             value={phone}

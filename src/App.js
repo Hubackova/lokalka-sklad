@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect  } from "react";
 
 import Reservation from "./components/booking";
 import Reservations from "./components/reservations";
@@ -10,7 +10,6 @@ import "./App.scss";
 import "font-awesome/css/font-awesome.min.css";
 
 const App = () => {
-  const [isAdmin, setAdmin] = useState(false);
   const [isReservation, setIsReservation] = useState(true);
   const [reservations, setReservations] = useState([]);
 
@@ -29,11 +28,11 @@ const App = () => {
   return (
     <UserContext.Provider value={useAuth()}>
       <div className="App">
-        <Header isAdmin={isAdmin} setAdmin={setAdmin} setIsReservation={setIsReservation} />
+        <Header setIsReservation={setIsReservation} />
         <main>
           <div className="menu" />
           {isReservation ? (
-            <Reservation reservations={reservations} isAdmin={isAdmin} />
+            <Reservation reservations={reservations} />
           ) : (
             <Reservations reservations={reservations} /> //handleChange={this.handleChange}
           )}

@@ -1,23 +1,28 @@
 import React, { useState, useContext } from "react";
 import logo from "../imgs/lokalka.png";
+import hudy from "../imgs/hudy.png";
 import { logout } from "../firebase/functions";
 import LoginForm from "./auth/LoginForm";
 import SignInForm from "./auth/SignInForm";
 import { UserContext } from "../Contexts";
 import "./Header.scss";
 
-const Header = ({ isAdmin, setIsReservation, setAdmin }) => {
+const Header = ({ setIsReservation }) => {
   const [loginModal, setLoginModal] = useState(false);
   const [registrationModal, setRegistrationModal] = useState(false);
   const { isAuth, user } = useContext(UserContext);
   const fblogout = () => {
     logout();
   };
-
+  const isAdmin =
+    user.uid === "9AmWsb1PbcgIPTynkHvsYco5XLB3" || user.uid === "Xs0w4MJr5xakWA4XBtAVAhawqzI3";
   return (
     <>
       <header className="main-header">
-        <img src={logo} alt="Lokalka.eu" />
+        <div>
+          <img src={logo} alt="Lokalka.eu" />
+          {isAdmin && <img src={hudy} alt="Hudy" />}
+        </div>
 
         <nav className="main-nav">
           <ul className="main-nav-list">

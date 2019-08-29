@@ -6,7 +6,7 @@ import ReservationForm from "./ReservationForm";
 import "./styles.scss";
 import { enumerateDaysBetweenDates } from "../../utils";
 
-const Reservation = ({ isAdmin, reservations }) => {
+const Reservation = ({ reservations }) => {
   const [itemNames, setItemNames] = useState([]);
   const [date, setDate] = useState(new Date());
   const [invalid, setInvalid] = useState(false);
@@ -14,7 +14,6 @@ const Reservation = ({ isAdmin, reservations }) => {
   useEffect(() => {
     if (itemNames.length === 0) setDate(new Date());
   }, [itemNames.length]);
-
 
   const checkDisableDates = disabledDates => {
     const startDate = moment(date[0]);
@@ -59,7 +58,6 @@ const Reservation = ({ isAdmin, reservations }) => {
       <div className="reservation-box">
         <SelectedItems itemNames={itemNames} removeItem={removeItem} />
         <ReservationForm
-          isAdmin={isAdmin}
           itemNames={itemNames}
           date={date}
           reservations={reservations}
