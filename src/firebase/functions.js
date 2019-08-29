@@ -1,7 +1,7 @@
 import firebase from 'firebase'
 
 function login(email, password) {
-  return firebase.auth().signInWithEmailAndPassword(email, password)
+  firebase.auth().signInWithEmailAndPassword(email, password)
     .catch((error) => alert(error))
 }
 
@@ -10,12 +10,12 @@ function logout() {
 }
 
 function signIn(email, password, id, phone) {
-  return firebase.auth().createUserWithEmailAndPassword(email, password)
+  firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((response) => {
       console.log(response)
-      return saveUser(email, firebase.auth().currentUser.uid, id, phone)
+      saveUser(email, firebase.auth().currentUser.uid, id, phone)
     })
-    .catch((error) => alert(error))
+    .catch((error) => console.log(error.message))
 }
 
 function saveUser(email, uid, id, phone) {

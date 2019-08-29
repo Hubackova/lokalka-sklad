@@ -6,7 +6,8 @@ const config = {
   databaseURL: "https://climbingdiary-a3ae5.firebaseio.com",
   projectId: "climbingdiary-a3ae5",
   storageBucket: "climbingdiary-a3ae5.appspot.com",
-  messagingSenderId: "319637312803"
+  messagingSenderId: "319637312803",
+  appId: "1:319637312803:web:1269b27e64a8309e"
 };
 
 firebase.initializeApp(config);

@@ -10,8 +10,9 @@ const SignInForm = ({ setRegistrationModal }) => {
   const [id, setId] = useState("");
   const [phone, setPhone] = useState("");
 
-  const fbSignIn = () => {
-    signIn(email, password, id, phone);
+  const fbSignIn = async () => {
+    await signIn(email, password, id, phone)
+    setRegistrationModal(false)
   };
 
   return (
@@ -20,9 +21,12 @@ const SignInForm = ({ setRegistrationModal }) => {
         <span className="close" onClick={() => setRegistrationModal(false)}>
           &times;
         </span>
-        
-        <form className="form">
-        <div className="info-text">Pokud už jsi registrován v deníčku výstupů, použij stejné přihlašovací údaje. Pokud si nepamatuješ heslo, v přihlašovacím formuláři si ho můžeš obnovit.</div>
+
+        <div className="form">
+          <div className="info-text">
+            Pokud už jsi registrován v deníčku výstupů, použij stejné přihlašovací údaje. Pokud si
+            nepamatuješ heslo, v přihlašovacím formuláři si ho můžeš obnovit.
+          </div>
           <Input
             handleChange={e => setEmail(e.target.value)}
             value={email}
@@ -30,13 +34,23 @@ const SignInForm = ({ setRegistrationModal }) => {
             type="email"
             required={true}
           />
-          <Input handleChange={e => setPassword(e.target.value)} value={password} label="Heslo" required={true}/>
-          <Input handleChange={e => setId(e.target.value)} value={id} label="ID" required={true}/>
-          <Input handleChange={e => setPhone(e.target.value)} value={phone} label="Tel. číslo" required={true}/>
-          <button className="modal-button" onClick={fbSignIn} type="submit">
+          <Input
+            handleChange={e => setPassword(e.target.value)}
+            value={password}
+            label="Heslo"
+            required={true}
+          />
+          <Input handleChange={e => setId(e.target.value)} value={id} label="ID" required={true} />
+          <Input
+            handleChange={e => setPhone(e.target.value)}
+            value={phone}
+            label="Tel. číslo"
+            required={true}
+          />
+          <button className="modal-button" onClick={fbSignIn}>
             Registrovat
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
 import ItemCalendar from "./ItemCalendar";
 import RentSummary from "./RentSummary";
-import { reservationsFb, usersFb } from "../../firebase/firebase";
+import { reservationsFb } from "../../firebase/firebase";
 import { itemList, itemTypes } from "../../data/items";
 import { UserContext } from "../../Contexts";
 import "./ReservationForm.scss";
@@ -19,14 +19,14 @@ const ReservationForm = ({
 }) => {
   const { isAuth, user } = useContext(UserContext);
 
-  const [userSetup, setUserSetup] = useState({ lokoId: "", phone: "", email: "" });
+  const [userSetup, setUserSetup] = useState({ phone: "", email: "" });
   const [reservationSetup, setReservationSetup] = useState({
     rent: isAdmin ? true : false,
     payed: false
   });
 
   useEffect(() => {
-    setUserSetup({ lokoId: user.lokoId, phone: user.phone, email: user.email });
+    setUserSetup({ phone: user.phone, email: user.email });
   }, [user.uid]);
 
   const daysNum = moment(date[1]).diff(date[0], "days");

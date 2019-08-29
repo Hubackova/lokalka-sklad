@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import firebase from "firebase";
-import { usersFb } from "../../firebase/firebase";
 
 function useAuth() {
   const INITIAL_STATE = {
     isAuth: false,
-    user: { lokoId: "", phone: "", email: "", uid: "" }
+    user: { phone: "", email: "", uid: "" }
   };
 
   const [authState, setState] = useState(INITIAL_STATE);

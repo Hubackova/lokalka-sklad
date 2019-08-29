@@ -39,11 +39,10 @@ export function switchName(itemName) {
 export function useFetch(url) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const CORSBYPASS = "https://api.codetabs.com/v1/proxy?quest=";
   async function fetchUrl() {
-    const response = await fetch(url);
+    const response = await fetch(`${CORSBYPASS}${url}`);
     const json = await response.json();
-    // setData(json);
-    console.log("aaa",json)
     setData(json)
     setLoading(false);
   }

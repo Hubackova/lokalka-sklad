@@ -96,17 +96,11 @@ function App({ reservations, title }) {
         columns: [
           {
             Header: "-",
-            accessor: row => (
-              <i id={row.key} onClick={removeReservation} className={`fa fa-trash remove`} />
-            )
+            accessor: row => <i id={row.key} key={row.key} onClick={removeReservation} className={`fa fa-trash remove`} />
           },
           {
             Header: "Položka",
             accessor: row => switchName(row.itemName)
-          },
-          {
-            Header: "ID člena",
-            accessor: "lokoId"
           },
           {
             Header: "Půjčit od",

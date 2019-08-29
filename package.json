@@ -12,7 +12,7 @@
     "react-dom": "^16.8.6",
     "react-scripts": "^2.1.8",
     "react-select": "^2.1.2",
-    "react-table": "next"
+    "react-table": "^7.0.0-alpha.18"
   },
   "scripts": {
     "start": "react-scripts start",
