@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import moment from "moment";
 import "./manage.scss";
 // import MailSender from "./MailSender";
@@ -6,7 +6,7 @@ import "./manage.scss";
 import { useFetch } from "../../utils";
 import { UserContext } from "../../Contexts";
 import Table from "./ReservationsTable";
-
+import { reservationsFb } from "../../firebase/firebase";
 const token = "WGnT6TjV92C7w65VWczsCacYKQChLZQjkU3pipZObYXpQMiXoOQKuKwG4QBo2Zai";
 
 const Reservations = ({ reservations }) => {
@@ -34,14 +34,17 @@ const Reservations = ({ reservations }) => {
     ? dataFio.accountStatement.transactionList.transaction
     : [];
 
-  //promapujeme vypujcene polozky a pokud je ve fio zaznam s danym VS, zmenime hodnotu
-  // zaplaceno na datum zaplaceni (true)
-  const dataWithPaymentDate = active.map(item => {
-    const wasPayed = fioData.find(j => (j.column5 && j.column5.value) === item.VS);
-    if (wasPayed) {
-      return { ...item, payed: wasPayed.column0.value };
-    } else return item;
-  });
+  useEffect(() => {
+    //promapujeme vypujcene polozky a pokud je ve fio zaznam s danym VS, zmenime hodnotu
+    // zaplaceno na datum zaplaceni (true)
+    active.forEach(item => {
+      //TODO: not use forEach
+      const wasPayed = fioData.find(j => (j.column5 && j.column5.value) === item.VS);
+      if (wasPayed && !item.payed) {
+        reservationsFb.child(item.key).update({ payed: wasPayed.column0.value });
+      }
+    });
+  }, [fioData]);
 
   return loading ? (
     "Loading..."

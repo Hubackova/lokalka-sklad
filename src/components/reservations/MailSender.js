@@ -1,7 +1,6 @@
 import React from "react";
 import moment from "moment";
 import SmtpService from "../../SmtpService";
-import { people } from "../../data/people";
 import { reservationsFb } from "../../firebase/firebase";
 
 function switchName(item) {
@@ -31,7 +30,7 @@ function sendMail(i, days) {
   sender.send(
     "lokalkasklad@gmail.com",
     mailTo,
-    `Vrácení ${itemA}`,
+    `Lokálka - vrácení ${itemA}`,
     `Ahoj, 
       dne ${
         date.to

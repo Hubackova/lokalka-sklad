@@ -1,5 +1,28 @@
 import moment from "moment";
 import { useState, useEffect } from "react";
+import SmtpService from "../SmtpService";
+
+
+
+export function sendRentInfo(mailTo, totalPrice, VS) {
+  const sender = new SmtpService();
+  sender.send(
+    "lokalkasklad@gmail.com",
+    mailTo,
+    `Lokálka-platba`,
+    `Ahoj, 
+      prosím, uhraď ${totalPrice} Kč za zapůjčení věcí z oddílového skladu.
+      Platební údaje:
+      Č.ú.: 2801236055 
+      Banka: 2010
+      VS: ${VS}
+      KS: 0400
+      Lokálka`,
+    "smtp.gmail.com",
+    "lokalkasklad@gmail.com",
+    "lokalka2019!!!"
+  );
+}
 
 export function enumerateDaysBetweenDates(startDate, endDate) {
   const currDate = moment(startDate, "YYYY-MM-DD");

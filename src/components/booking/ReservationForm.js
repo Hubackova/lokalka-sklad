@@ -7,6 +7,8 @@ import { itemList, itemTypes } from "../../data/items";
 import { UserContext } from "../../Contexts";
 import "./ReservationForm.scss";
 import Input from "../Input";
+import { sendRentInfo } from "../../utils";
+import { usersFb } from "../../firebase/firebase";
 
 const ReservationForm = ({
   itemNames,
@@ -28,8 +30,8 @@ const ReservationForm = ({
   });
 
   useEffect(() => {
-    setUserSetup({ phone: user.phone, email: isAdmin ? "" : user.email });
-    setReservationSetup({...reservationSetup, rent: isAdmin})
+    setUserSetup({ phone: isAdmin ? "" : user.phone, email: isAdmin ? "" : user.email });
+    setReservationSetup({ ...reservationSetup, rent: isAdmin });
   }, [user.uid, isAdmin]);
 
   const daysNum = date[0] ? moment(date[1]).diff(date[0], "days") || 1 : 0;
@@ -38,6 +40,7 @@ const ReservationForm = ({
     to: moment(date[1]).format("YYYY-MM-DD")
   };
   const reservationDate = moment(new Date()).format("YYYY-MM-DD");
+  const VS = userSetup.phone.slice(-6) + moment(new Date()).format("MMDD");
 
   function getPrice(i, daysNum) {
     const item = itemList.find(j => j.id === i);
@@ -59,9 +62,13 @@ const ReservationForm = ({
         price: price,
         reservationDate,
         notification: false,
-        returned: false
+        returned: false,
+        VS
       };
     });
+    const prices = addingItems.map(i => i.price);
+    const totalPrice = prices.length > 0 ? prices.reduce((a, b) => a + b) : 0;
+    sendRentInfo(userSetup.email, totalPrice, VS);
     initializeState();
     addingItems.forEach(element => reservationsFb.push(element));
   }
@@ -87,7 +94,7 @@ const ReservationForm = ({
       {hasItems && isAuth && (
         <div className="reservation-submit-panel">
           <button
-            onClick={addReservation} //TODO: pokud admin - doplnit tel. číslo!!§
+            onClick={addReservation}
             className="reserve-button"
             disabled={!daysNum || invalid}
           >
@@ -119,15 +126,30 @@ const ReservationForm = ({
                   checked={reservationSetup.rent}
                 />
               </div>
-              <div><label>Email:</label><Input
-                handleChange={e => setUserSetup({ ...userSetup, email: e.target.value })}
-                value={userSetup.email}
-                label=""
-                placeholder=" email toho, kdo si věc půjčuje"
-                type="email"
-                required={true}
-                style={{width: 200}}
-              /></div>
+              <div>
+                <label>Email:</label>
+                <Input
+                  handleChange={e => setUserSetup({ ...userSetup, email: e.target.value })}
+                  value={userSetup.email}
+                  label=""
+                  placeholder=" email toho, kdo si věc půjčuje"
+                  type="email"
+                  required={true}
+                  style={{ width: 220 }}
+                />
+              </div>
+              <div>
+                <label>Tel. číslo:</label>
+                {/* TODO: pokud admin - zkusit doplnit tel. číslo po zadání emailu */}
+                <Input
+                  handleChange={e => setUserSetup({ ...userSetup, phone: e.target.value })}
+                  value={userSetup.phone}
+                  label=""
+                  placeholder=" tel.číslo toho, kdo si věc půjčuje"
+                  required={true}
+                  style={{ width: 220 }}
+                />
+              </div>
             </>
           )}
         </div>

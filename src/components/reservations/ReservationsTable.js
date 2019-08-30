@@ -73,10 +73,15 @@ function App({ reservations, title, isAdmin }) {
       ? reservations.filter(i => !i.rent && (!i.returned || !i.payed))
       : reservations.filter(i => i.returned && i.payed);
 
+  //TODO: potrebujeme mapovat pres vsechny rezervace, nebo jen pro konkretni typ ("zapujceno..") ???
   const updateReservation = e => {
     const attr = e.target.getAttribute("name");
-    const reservationValue = data && data.find(i => i.key === e.target.id)[attr];
-    reservationsFb.child(e.target.id).update({ [attr]: !reservationValue });
+    const reservation = reservations && reservations.find(i => i.key === e.target.id);
+    const reservationValue = reservation && reservation[attr];
+    if (reservation) {
+      reservationsFb.child(e.target.id).update({ [attr]: !reservationValue });
+    }
+    console.log("item was not find");
   };
 
   const removeReservation = e => {
@@ -118,10 +123,10 @@ function App({ reservations, title, isAdmin }) {
             Header: "Půjčit do",
             accessor: row => moment(row.date.to).format("DD.MM.YY")
           },
-          {
-            Header: "Počet dní",
-            accessor: "daysNum"
-          },
+          // {
+          //   Header: "Počet dní",
+          //   accessor: "daysNum"
+          // },
           {
             Header: "Cena",
             accessor: row => `${row.price},-`
