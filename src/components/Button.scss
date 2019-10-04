@@ -1,0 +1,62 @@
+@import "../colors";
+
+//BUTTON-GENERAL
+@mixin button-bg($bg) {
+    background: -webkit-linear-gradient(
+      left,
+      darken($bg, 5%) 0%,
+      darken($bg, 5%) 40px,
+      $bg 40px,
+      $bg 100%
+    );
+  }
+  
+  .btn {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    border: 0;
+    opacity: 0.8;
+    &:hover:not([disabled]) {
+      opacity: 1;
+      transition: all 0.3s ease;
+      i {
+        transform: scale(1.2);
+      }
+    }
+    i {
+      padding-right: 20px;
+    }
+    &:disabled {
+      background: -webkit-linear-gradient(
+        left,
+        darken(lightgrey, 5%) 0%,
+        darken(lightgrey, 5%) 40px,
+        lightgrey 40px,
+        lightgrey 100%
+      );
+      cursor: not-allowed;
+      color: black;
+      i {
+        cursor: not-allowed;
+      }
+    }
+  }
+  
+  .btn-green {
+    @include button-bg($green);
+  }
+  
+  .btn-orange {
+    @include button-bg($orange);
+  }
+  
+  .btn-blue {
+    @include button-bg($blue);
+  }
+  

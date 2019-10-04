@@ -1,0 +1,54 @@
+@import "../../colors";
+
+.reservation {
+  display: flex;
+  flex: 1;
+  min-width: 70vw;
+  height: 100%;
+  @media (max-width: 799px) {
+    flex-direction: column;
+  }
+
+  .reservation-box {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 100%;
+    @media (max-width: 400px) {
+      padding: 0px;
+    }
+    > div {
+      margin: 10px;
+    }
+    input {
+      padding: 10px 5px;
+      margin: 0;
+      border: 0.5px solid grey;
+    }
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 5px;
+    }
+    label {
+      display: block;
+    }
+  }
+
+  @media (max-width: $mq-medium) {
+    flex-direction: column;
+    width: 100vw;
+    padding: 0;
+    > div {
+      padding: 0;
+    }
+  }
+}
+
+.btn.rentitem {
+  display: inline-block;
+  cursor: default;
+  i {
+    cursor: pointer;
+  }
+}

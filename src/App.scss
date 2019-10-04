@@ -1,0 +1,85 @@
+@import "./colors";
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #5e757e;
+  height: 100%;
+  .main-header {
+    background-color: #5e757e;
+    width: 100%;
+  }
+
+  main {
+    background-color: $white;
+    width: 100%;
+  }
+
+  //MENU-GENERAL
+  .menu {
+    @media (max-width: 400px) {
+      width: 100%;
+    }
+    span {
+      background-color: $blue;
+      color: white;
+      padding: 20px;
+      display: inline-block;
+      margin: 20px 5px;
+      cursor: pointer;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      position: relative;
+      overflow: hidden;
+      @media (max-width: 400px) {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 0;
+      }
+      &:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        right: 100%;
+        top: 0;
+        background-color: black;
+        height: 4px;
+        transition-property: right;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-out;
+      }
+      &:hover:before {
+        right: 0;
+      }
+      &:hover,
+      &:focus {
+        color: black;
+        i {
+          color: gold;
+        }
+      }
+      i {
+        color: $white;
+        &.admin {
+          color: gold;
+        }
+      }
+    }
+  }
+
+  //ICONS-GENERAL
+  i {
+    cursor: pointer;
+    margin-right: 5px;
+    &.success {
+      color: green;
+    }
+    &.remove:hover {
+      color: red;
+    }
+  }
+}
+

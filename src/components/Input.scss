@@ -1,0 +1,40 @@
+@import "../colors";
+
+div.input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+
+  label {
+    color: $mainBackground;
+  }
+}
+
+input {
+  flex: 3;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $grey200;
+  color: $grey600;
+  background-color: white;
+  outline: none;
+  padding: 10px 15px;
+  &:focus {
+    color: #444444;
+    border-color: $grey300;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    color: $grey300;
+    background-color: $grey50;
+    border-color: $grey200;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}

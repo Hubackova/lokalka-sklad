@@ -1,0 +1,23 @@
+.search {
+    border: 2px solid grey;
+    width: 320px;
+    margin: 20px;
+    display: flex;
+    align-self: flex-end;
+    @media (max-width: 400px) {
+        align-self: center;
+        margin: 0;
+      }
+    .searchbox {
+        min-width: 280px;
+        min-height: 40px;
+        padding: 5px 10px;
+        border: 0;
+        outline: none;
+    }
+    i.fa-search {
+        padding: 10px;
+        cursor: default;
+    }
+}
+

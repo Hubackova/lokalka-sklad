@@ -1,0 +1,70 @@
+@import "../colors";
+
+// HEADER-GENERAL
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  @media (max-width: $mq-small) {
+    flex-direction: column;
+  }
+}
+
+.main-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-nav-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  @media (max-width: $mq-small) {
+    width: 100%;
+  }
+}
+
+.main-nav li {
+  font-size: 1.2rem;
+  color: $white;
+  cursor: pointer;
+  padding: 0 1rem;
+  text-align: center;
+  @media (max-width: $mq-medium) {
+    display: inline-block;
+    span {
+      display: none;
+    }
+  }
+  @media (max-width: $mq-small) {
+    flex: 1;
+    border: 1px solid $white;
+  }
+}
+
+.main-nav li i {
+  color: $white;
+  font-size: 2rem;
+  &:not(.fa-sign-out) {
+    display: none;
+  }
+  @media (max-width: $mq-medium) {
+    &:not(.fa-sign-out) {
+      display: inline-block;
+    }
+    padding: 0.3rem;
+  }
+}
+
+// LOGO
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 0 1vw;
+  @media (max-width: $mq-small) {
+    margin: 0 auto;
+  }
+}
