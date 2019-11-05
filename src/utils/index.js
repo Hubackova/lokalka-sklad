@@ -92,5 +92,5 @@ export function useFetch(url) {
 }
 
 export function isAdmin(user) {
-  return user.uid === process.env.REACT_APP_ADMIN_KEY_1 || user.uid === process.env.REACT_APP_ADMIN_KEY_2;
+  return user.uid === process.env.GATSBY_ADMIN_KEY_1 || user.uid === process.env.GATSBY_ADMIN_KEY_2;
 }
