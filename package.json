@@ -1,6 +1,9 @@
 {
   "name": "lokalka-sklad",
   "version": "0.1.0",
+  "engines": {
+    "node": "10.16.0"
+  },
   "private": true,
   "dependencies": {
     "firebase": "^5.7.0",
