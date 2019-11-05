@@ -27,7 +27,7 @@ const Reservations = ({ reservations }) => {
     .min(active.map(reservation => moment(reservation.reservationDate)))
     .format("YYYY-MM-DD");
   const [dataFio, loading] = useFetch(
-    `https://www.fio.cz/ib_api/rest/periods/${process.env.NODE_ENV_FIO_TOKEN}/${fioDateFrom}/${now}/transactions.json`
+    `https://www.fio.cz/ib_api/rest/periods/${process.env.REACT_APP_FIO_TOKEN}/${fioDateFrom}/${now}/transactions.json`
   );
   const fioData = dataFio.accountStatement
     ? dataFio.accountStatement.transactionList.transaction
