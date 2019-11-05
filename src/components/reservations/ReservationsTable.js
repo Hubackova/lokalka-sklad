@@ -125,7 +125,7 @@ function App({ reservations, title, isAdmin }) {
           : itemName;
       const pricesAll = otherPrices ? [...otherPrices, price] : price;
       const isAllReturned = otherReservationsFromBlock.every(j => j.returned);
-      const totalPrice = pricesAll.length > 0 ? pricesAll.reduce((a, b) => a + b) : 0;
+      const totalPrice = pricesAll.length > 0 ? pricesAll.reduce((a, b) => a + b) : pricesAll;
       isAllReturned && sendRentInfo(reservation.email, totalPrice, reservation.VS, otherNames); //TODO: vytunit mail
     }
   };
