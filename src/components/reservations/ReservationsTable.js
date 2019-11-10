@@ -148,13 +148,13 @@ function App({ reservations, title, isAdmin }) {
         {
           show: title === "Aktuálně rezervováno" || isAdmin,
           Header: "-",
-          accessor: row =>
-            moment(row.date.from, "YYYY-MM-DD").diff(moment(new Date()), "days") < 2 && !isAdmin ? (
+          Cell: ({ row: { original } }) =>
+            moment(original.date.from, "YYYY-MM-DD").diff(moment(new Date()), "days") < 2 && !isAdmin ? (
               "-"
             ) : (
               <i
-                id={row.key}
-                key={row.key}
+                id={original.key}
+                key={original.key}
                 onClick={removeReservation}
                 className={`fa fa-trash remove`}
               />
@@ -163,11 +163,11 @@ function App({ reservations, title, isAdmin }) {
         {
           show: isAdmin,
           Header: "Telefonní číslo",
-          accessor: row => <span title={row.email}>{row.phone}</span>
+          Cell: ({ row: { original } }) => <span title={original.email}>{original.phone}</span>
         },
         {
           Header: "Položka",
-          accessor: row => <div className="table-itemName">{switchName(row.itemName)}</div>
+          Cell: ({ row: { original } }) => <div className="table-itemName">{switchName(original.itemName)}</div>
         },
         {
           Header: "Od",
@@ -188,63 +188,63 @@ function App({ reservations, title, isAdmin }) {
         },
         {
           Header: "Cena",
-          accessor: row => {
-            const daysToReturn = getDaysToReturn(row.date.to);
-            const totalDays = daysToReturn >= 0 ? row.daysNum : daysToReturn * -1 + row.daysNum;
-            return getDaysToReturn(row.date.to) >= 0 ? (
-              `${row.price},-`
+          Cell: ({ row: { original } }) => {
+            const daysToReturn = getDaysToReturn(original.date.to);
+            const totalDays = daysToReturn >= 0 ? original.daysNum : daysToReturn * -1 + original.daysNum;
+            return getDaysToReturn(original.date.to) >= 0 ? (
+              `${original.price},-`
             ) : (
-              <span>{`${getPrice(row, totalDays)} ,-`}</span>
+              <span>{`${getPrice(original, totalDays)} ,-`}</span>
             );
           }
         },
         {
           show: title !== "Aktuálně rezervováno" && isAdmin,
           Header: "Vráceno",
-          accessor: row => (
+          Cell: ({ row: { original } }) => (
             <i
-              id={row.key}
+              id={original.key}
               name="returned"
               onClick={isAdmin ? updateReservation : () => console.log("no rights")}
-              className={`fa fa-check-square${row.returned ? " success" : ""}`}
+              className={`fa fa-check-square${original.returned ? " success" : ""}`}
             />
           )
         },
         {
           show: isAdmin || title === "Aktuálně zapůjčeno",
           Header: "Zaplaceno",
-          accessor: row => (
+          Cell: ({ row: { original } }) => (
             <i
-              id={row.key}
+              id={original.key}
               name="payed"
               onClick={isAdmin ? updateReservation : () => console.log("no rights")}
-              className={`fa fa-check-square${row.payed ? " success" : ""}`}
+              className={`fa fa-check-square${original.payed ? " success" : ""}`}
             />
           )
         },
         {
           show: title === "Aktuálně rezervováno" && isAdmin,
           Header: "Zapůjčeno",
-          accessor: row => (
+          Cell: ({ row: { original } }) => (
             <i
-              id={row.key}
+              id={original.key}
               name="rent"
               onClick={isAdmin ? updateReservation : () => console.log("no rights")}
-              className={`fa fa-check-square${row.rent ? " success" : ""}`}
+              className={`fa fa-check-square${original.rent ? " success" : ""}`}
             />
           )
         },
         {
           show: title === "Aktuálně zapůjčeno",
           Header: "Dnů do vrácení",
-          accessor: row => {
-            const daysToReturn = getDaysToReturn(row.date.to);
+          Cell: ({ row: { original } }) => {
+            const daysToReturn = getDaysToReturn(original.date.to);
             const color = daysToReturn > 0 ? "black" : daysToReturn < -10 ? "red" : "orange";
-            return row.returned ? (
+            return original.returned ? (
               "vráceno"
             ) : (
               <span style={{ color: color, fontWeight: "bold" }}>
-                {getDaysToReturn(row.date.to)}
+                {getDaysToReturn(original.date.to)}
               </span>
             );
           }
@@ -252,11 +252,11 @@ function App({ reservations, title, isAdmin }) {
         {
           show: title === "Aktuálně zapůjčeno" && isAdmin,
           Header: "!",
-          accessor: row => {
-            const daysToReturn = getDaysToReturn(row.date.to);
+          Cell: ({ row: { original } }) => {
+            const daysToReturn = getDaysToReturn(original.date.to);
             const color = daysToReturn > 0 ? "black" : daysToReturn < -10 ? "red" : "orange";
-            return !row.returned && daysToReturn < 0 ? (
-              <MailSender i={row} color={color} daysToReturn={daysToReturn} />
+            return !original.returned && daysToReturn < 0 ? (
+              <MailSender i={original} color={color} daysToReturn={daysToReturn} />
             ) : (
               "-"
             );

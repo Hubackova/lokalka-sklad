@@ -15,20 +15,20 @@ const Header = ({ setIsReservation }) => {
   const fblogout = () => {
     logout();
   };
-  const isAdmin = adminFunction(user)
-  console.log(isAdmin)
+  const isAdmin = adminFunction(user);
   return (
     <>
       <header className="main-header">
-        <div>
+        <div className="main-imgs">
           <a
             href="https://www.lokalka.eu/oddilovy-sklad/"
             target="_blank"
             rel="noopener noreferrer"
+            className="logo-container"
           >
             <img src={logo} alt="Lokalka.eu" />
           </a>
-          {isAdmin && <img src={hudy} alt="Hudy" />}
+          <div className="logo-container">{isAdmin && <img src={hudy} alt="Hudy" />}</div>
         </div>
 
         <nav className="main-nav">

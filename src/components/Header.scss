@@ -9,6 +9,11 @@
   @media (max-width: $mq-small) {
     flex-direction: column;
   }
+  .main-imgs {
+    height: 100%;
+    display: flex;
+    align-content: center;
+  }
 }
 
 .main-nav {
