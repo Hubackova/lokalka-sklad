@@ -1,6 +1,9 @@
 export const itemTypes = [
-  { type: "ice-axes", name: "Cepíny", price1: 50, price2: 100, price3: 200 },
+  { type: "ice-axes-bandit", name: "Cepíny SR Bandit", price1: 50, price2: 100, price3: 200 },
+  { type: "ice-axes-ergo", name: "Cepíny Petzl Ergo", price1: 50, price2: 100, price3: 200 },
+  { type: "ice-axes", name: "Cepíny Raveltik", price1: 50, price2: 100, price3: 200 },
   { type: "ice-axes-gladiator", name: "Cepíny Gladiator", price1: 50, price2: 100, price3: 200 },
+
   {
     type: "ice-axes-supercup",
     name: "Cepíny Raveltik Super Cup",
@@ -59,6 +62,20 @@ export const itemTypes = [
 ];
 
 export const itemList = [
+  { id: "ice-axes-bandit-01", type: "ice-axes-bandit", label: "Cepín - Bandit 01 (L) - jen do ledu!" },
+  { id: "ice-axes-bandit-02", type: "ice-axes-bandit", label: "Cepín - Bandit 02 (K)- jen do ledu!" },
+  { id: "ice-axes-bandit-03", type: "ice-axes-bandit", label: "Cepín - Bandit 03 (L) - jen do ledu!" },
+  { id: "ice-axes-bandit-04", type: "ice-axes-bandit", label: "Cepín - Bandit 04 (K)- jen do ledu!" },
+  { id: "ice-axes-bandit-05", type: "ice-axes-bandit", label: "Cepín - Bandit 05 (L)"},
+  { id: "ice-axes-bandit-06", type: "ice-axes-bandit", label: "Cepín - Bandit 06 (K)" },
+  { id: "ice-axes-bandit-07", type: "ice-axes-bandit", label: "Cepín - Bandit 07 (L)"},
+  { id: "ice-axes-bandit-08", type: "ice-axes-bandit", label: "Cepín - Bandit 08 (K)" },
+  { id: "ice-axes-bandit-09", type: "ice-axes-bandit", label: "Cepín - Bandit 09 (L)"},
+  { id: "ice-axes-bandit-10", type: "ice-axes-bandit", label: "Cepín - Bandit 10 (K)" },
+
+  { id: "ice-axes-ergo-01", type: "ice-axes-ergo", label: "Cepín - Petzl Ergo + ledové hroty - drytool/led" },
+  { id: "ice-axes-ergo-02", type: "ice-axes-ergo", label: "Cepín - Petzl Ergo + ledové hroty - drytool/led" },
+
   { id: "ice-axes-raveltik-01", type: "ice-axes", label: "Cepín - Raveltik 01" },
   { id: "ice-axes-raveltik-02", type: "ice-axes", label: "Cepín - Raveltik 02" },
   { id: "ice-axes-raveltik-03", type: "ice-axes", label: "Cepín - Raveltik 03" },
@@ -78,12 +95,16 @@ export const itemList = [
   { id: "ice-axes-raveltik-17", type: "ice-axes", label: "Cepín - Raveltik 17" },
   { id: "ice-axes-raveltik-18", type: "ice-axes", label: "Cepín - Raveltik 18" },
 
-  { id: "ice-axes-gladiator-01", type: "ice-axes-gladiator", label: "Cepín - Gladiator 01" },
-  { id: "ice-axes-gladiator-02", type: "ice-axes-gladiator", label: "Cepín - Gladiator 02" },
-  { id: "ice-axes-supercup-01", type: "ice-axes-supercup", label: "Cepín - Super Cup 01" },
-  { id: "ice-axes-supercup-02", type: "ice-axes-supercup", label: "Cepín - Super Cup 02" },
-  { id: "ice-axes-supercup-03", type: "ice-axes-supercup", label: "Cepín - Super Cup 03" },
-  { id: "ice-axes-supercup-04", type: "ice-axes-supercup", label: "Cepín - Super Cup 04" },
+  { id: "ice-axes-gladiator-01", type: "ice-axes-gladiator", label: "Cepín - Gladiator G1 - drytool" },
+  { id: "ice-axes-gladiator-02", type: "ice-axes-gladiator", label: "Cepín - Gladiator G2 - drytool" },
+
+  { id: "ice-axes-supercup-01", type: "ice-axes-supercup", label: "Cepín - Demon 01 - mix/drytool" },
+  { id: "ice-axes-supercup-02", type: "ice-axes-supercup", label: "Cepín - Demon 02 - mix/drytool" },
+  { id: "ice-axes-supercup-03", type: "ice-axes-supercup", label: "Cepín - Super Cup 03 - mix/drytool" },
+  { id: "ice-axes-supercup-04", type: "ice-axes-supercup", label: "Cepín - Super Cup 04 - mix/drytool" },
+//TODO: v tech je trochu bordel
+
+
   { id: "ice-axes-RE-turistic-01", type: "ice-axes-RE-turistic", label: "Turistický RE 01 65cm" },
   { id: "ice-axes-RE-turistic-02", type: "ice-axes-RE-turistic", label: "Turistický RE 02 55cm" },
   { id: "ice-axes-RE-turistic-03", type: "ice-axes-RE-turistic", label: "Turistický RE 03 55cm" },

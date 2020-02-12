@@ -36,8 +36,12 @@ export function enumerateDaysBetweenDates(startDate, endDate) {
 
 export function switchName(itemName) {
   switch (true) {
+    case itemName.includes("ice-axes-bandit"):
+      return itemName.replace("ice-axes-bandit", "Cepín SR Bandit");
     case itemName.includes("ice-axes-raveltik"):
       return itemName.replace("ice-axes-raveltik", "Cepín Raveltik");
+    case itemName.includes("ice-axes-ergo"):
+      return itemName.replace("ice-axes-ergo", "Cepín - Petzl Ergo");
     case itemName.includes("ice-axes-gladiator"):
       return itemName.replace("ice-axes-gladiator", "Cepín Gladiator");
     case itemName.includes("ice-axes-supercup"):
