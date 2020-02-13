@@ -56,7 +56,7 @@ const Reservation = ({ reservations }) => {
     <div className="reservation">
       <MenuOfItems addItem={addItem} date={date} reservations={reservations} />
       <div className="reservation-box">
-      <h5>Prosím, pokud je u maček/cepínu napsáno, že jsou jen do ledu, popř. jen na drytool, berte to na vědomí. Pokud jdete mixy, půjčte si jiný. Díky!</h5>
+      <h5>Prosím, pokud je u maček/cepínů napsáno, že jsou jen do ledu, popř. jen na drytool, berte to na vědomí. Pokud jdete mixy, půjčte si jiný. Díky!</h5>
         <SelectedItems itemNames={itemNames} removeItem={removeItem} />
         <ReservationForm
           itemNames={itemNames}
