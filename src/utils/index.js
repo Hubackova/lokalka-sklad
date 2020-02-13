@@ -42,10 +42,21 @@ export function switchName(itemName) {
       return itemName.replace("ice-axes-raveltik", "Cepín Raveltik");
     case itemName.includes("ice-axes-ergo"):
       return itemName.replace("ice-axes-ergo", "Cepín - Petzl Ergo");
-    case itemName.includes("ice-axes-gladiator"):
-      return itemName.replace("ice-axes-gladiator", "Cepín Gladiator");
-    case itemName.includes("ice-axes-supercup"):
-      return itemName.replace("ice-axes-supercup", "Cepín Super Cup");
+    case itemName.includes("ice-axes-gladiator-01"):
+      return itemName.replace("ice-axes-gladiator-01", "Cepín Gladiator G1");
+      case itemName.includes("ice-axes-gladiator-02"):
+        return itemName.replace("ice-axes-gladiator-02", "Cepín Gladiator G2");
+
+      //u demon a super cup trochu komplikovane cislovani, takze to musi byt takto
+      case itemName.includes("ice-axes-supercup-01"):
+        return itemName.replace("ice-axes-supercup-01", "Cepín Demon R3");
+      case itemName.includes("ice-axes-supercup-02"):
+        return itemName.replace("ice-axes-supercup-02", "Cepín Demon R4");
+      case itemName.includes("ice-axes-supercup-03"):
+        return itemName.replace("ice-axes-supercup-03", "Cepín Super Cup R1");
+    case itemName.includes("ice-axes-supercup-04"):
+      return itemName.replace("ice-axes-supercup-04", "Cepín Super Cup R2");
+
     case itemName.includes("ice-axes-RE-turistic"):
       return itemName.replace("ice-axes-RE-turistic", "Cepín Turistický RE ");
     case itemName.includes("ice-axes-Raveltic-turistic"):
@@ -54,14 +65,37 @@ export function switchName(itemName) {
       return itemName.replace("ice-axes-BD-turistic", "Cepín Turistický BD");
     case itemName.includes("ice-axes-Grivel-turistic"):
       return itemName.replace("ice-axes-Grivel-turistic", "Cepín Turistický Grivel");
-    case itemName.includes("crampons-semi"):
-      return itemName.replace("crampons-semi", "Mačky RE - poloautomaty");
-    case itemName.includes("crampons-uni"):
-      return itemName.replace("crampons-uni", "Mačky RE - uni");
-    case itemName.includes("crampons-petzl"):
+ 
+    
+    case itemName.includes("crampons-semi-01"):
+      return itemName.replace("crampons-semi-01", "Mačky RE - poloautomaty 01");
+    case itemName.includes("crampons-semi-02"):
+      return itemName.replace("crampons-semi-02", "Mačky RE - poloautomaty 09");
+    case itemName.includes("crampons-semi-03"):
+      return itemName.replace("crampons-semi-03", "Mačky RE - poloautomaty 04");
+
+    case itemName.includes("crampons-uni-01"):
+      return itemName.replace("crampons-uni-01", "Mačky RE - uni 13");
+    case itemName.includes("crampons-uni-02"):
+      return itemName.replace("crampons-uni-02", "Mačky RE - uni 03");    
+    case itemName.includes("crampons-uni-03"):
+      return itemName.replace("crampons-uni-03", "Mačky RE - uni 07");    
+    case itemName.includes("crampons-uni-04"):
+      return itemName.replace("crampons-uni-04", "Mačky RE - uni 08");    
+    case itemName.includes("crampons-uni-05"):
+      return itemName.replace("crampons-uni-05", "Mačky RE - uni 06");
+
+
+    case itemName.includes("crampons-petzl"): 
       return itemName.replace("crampons-petzl", "Mačky Petzl Plaut");
-    case itemName.includes("crampons-cassin"):
-      return itemName.replace("crampons-cassin", "Mačky Cassin");
+
+    case itemName.includes("crampons-cassin-01"):
+      return itemName.replace("crampons-cassin-01", "Mačky Cassin 10");
+    case itemName.includes("crampons-cassin-02"):
+      return itemName.replace("crampons-cassin-02", "Mačky Cassin 11");
+    case itemName.includes("crampons-cassin-03"):
+      return itemName.replace("crampons-cassin-03", "Mačky Cassin 12");     
+
     case itemName.includes("crampons-frame"):
       return itemName.replace("crampons-frame", "Mačky automat/rámovky");
     case itemName.includes("shovel"):

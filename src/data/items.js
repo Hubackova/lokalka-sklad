@@ -12,6 +12,13 @@ export const itemTypes = [
     price3: 200
   },
   {
+    type: "ice-axes-demon",
+    name: "Cepíny Raveltik Demon",
+    price1: 50,
+    price2: 100,
+    price3: 200
+  },
+  {
     type: "ice-axes-RE-turistic",
     name: "Turistické cepíny RE",
     price1: 50,
@@ -63,9 +70,9 @@ export const itemTypes = [
 
 export const itemList = [
   { id: "ice-axes-bandit-01", type: "ice-axes-bandit", label: "Cepín - Bandit 01 (L) - jen do ledu!" },
-  { id: "ice-axes-bandit-02", type: "ice-axes-bandit", label: "Cepín - Bandit 02 (K)- jen do ledu!" },
+  { id: "ice-axes-bandit-02", type: "ice-axes-bandit", label: "Cepín - Bandit 02 (K) - jen do ledu!" },
   { id: "ice-axes-bandit-03", type: "ice-axes-bandit", label: "Cepín - Bandit 03 (L) - jen do ledu!" },
-  { id: "ice-axes-bandit-04", type: "ice-axes-bandit", label: "Cepín - Bandit 04 (K)- jen do ledu!" },
+  { id: "ice-axes-bandit-04", type: "ice-axes-bandit", label: "Cepín - Bandit 04 (K) - jen do ledu!" },
   { id: "ice-axes-bandit-05", type: "ice-axes-bandit", label: "Cepín - Bandit 05 (L)"},
   { id: "ice-axes-bandit-06", type: "ice-axes-bandit", label: "Cepín - Bandit 06 (K)" },
   { id: "ice-axes-bandit-07", type: "ice-axes-bandit", label: "Cepín - Bandit 07 (L)"},
@@ -98,10 +105,11 @@ export const itemList = [
   { id: "ice-axes-gladiator-01", type: "ice-axes-gladiator", label: "Cepín - Gladiator G1 - drytool" },
   { id: "ice-axes-gladiator-02", type: "ice-axes-gladiator", label: "Cepín - Gladiator G2 - drytool" },
 
-  { id: "ice-axes-supercup-01", type: "ice-axes-supercup", label: "Cepín - Demon 01 - mix/drytool" },
-  { id: "ice-axes-supercup-02", type: "ice-axes-supercup", label: "Cepín - Demon 02 - mix/drytool" },
-  { id: "ice-axes-supercup-03", type: "ice-axes-supercup", label: "Cepín - Super Cup 03 - mix/drytool" },
-  { id: "ice-axes-supercup-04", type: "ice-axes-supercup", label: "Cepín - Super Cup 04 - mix/drytool" },
+
+  { id: "ice-axes-supercup-01", type: "ice-axes-demon", label: "Cepín - Demon R3 - mix/drytool" },
+  { id: "ice-axes-supercup-02", type: "ice-axes-demon", label: "Cepín - Demon R4 - mix/drytool" },
+  { id: "ice-axes-supercup-03", type: "ice-axes-supercup", label: "Cepín - Super Cup R1 - mix/drytool" },
+  { id: "ice-axes-supercup-04", type: "ice-axes-supercup", label: "Cepín - Super Cup R2 - mix/drytool" },
 //TODO: v tech je trochu bordel
 
 
@@ -119,29 +127,31 @@ export const itemList = [
   {
     id: "ice-axes-Raveltic-turistic-12",
     type: "ice-axes-Raveltic-turistic",
-    label: "Turistický cepín Raveltik 12"
+    label: "Turistický cepín Raveltik (12) 65cm"
   },
-  { id: "ice-axes-BD-turistic-13", type: "ice-axes-BD-turistic", label: "Turistický cepín BD 13" },
+  { id: "ice-axes-BD-turistic-13", type: "ice-axes-BD-turistic", label: "Turistický cepín BD (13) 65cm" },
   {
     id: "ice-axes-Grivel-turistic-14",
     type: "ice-axes-Grivel-turistic",
-    label: "Turistický cepín Grivel 14"
+    label: "Turistický cepín Grivel (14)"
   },
 
-  { id: "crampons-semi-01", type: "crampons-semi", label: "Mačky - RE - poloautomaty" },
-  { id: "crampons-semi-02", type: "crampons-semi", label: "Mačky - RE - poloautomaty" },
-  { id: "crampons-semi-03", type: "crampons-semi", label: "Mačky - RE - poloautomaty" },
-  { id: "crampons-uni-01", type: "crampons-uni", label: "Mačky - RE - uni" },
-  { id: "crampons-uni-02", type: "crampons-uni", label: "Mačky - RE - uni" },
-  { id: "crampons-uni-03", type: "crampons-uni", label: "Mačky - RE - uni" },
-  { id: "crampons-uni-04", type: "crampons-uni", label: "Mačky - RE - uni" },
-  { id: "crampons-uni-05", type: "crampons-uni", label: "Mačky - RE - uni" },
-  { id: "crampons-uni-06", type: "crampons-uni", label: "Mačky - RE - uni" },
-  { id: "crampons-uni-07", type: "crampons-uni", label: "Mačky - RE - uni" },
+  { id: "crampons-semi-01", type: "crampons-semi", label: "Mačky - RE - poloautomaty 01 - jen do ledu!" },
+  { id: "crampons-semi-02", type: "crampons-semi", label: "Mačky - RE - poloautomaty 09" },
+  { id: "crampons-semi-03", type: "crampons-semi", label: "Mačky - RE - poloautomaty 04 - jen do ledu!" },
+
+  { id: "crampons-uni-01", type: "crampons-uni", label: "Mačky - RE - uni 13 - jen do ledu!" },
+  { id: "crampons-uni-02", type: "crampons-uni", label: "Mačky - RE - uni 03 - jen do ledu!" },
+  { id: "crampons-uni-03", type: "crampons-uni", label: "Mačky - RE - uni 07" },
+  { id: "crampons-uni-04", type: "crampons-uni", label: "Mačky - RE - uni 08" },
+  { id: "crampons-uni-05", type: "crampons-uni", label: "Mačky - RE - uni 06" },
+
+
+
   { id: "crampons-petzl", type: "crampons-petzl", label: "Mačky - Petzl Plaut" },
-  { id: "crampons-cassin-01", type: "crampons-cassin", label: "Mačky - Cassin" },
-  { id: "crampons-cassin-02", type: "crampons-cassin", label: "Mačky - Cassin" },
-  { id: "crampons-cassin-03", type: "crampons-cassin", label: "Mačky - Cassin" },
+  { id: "crampons-cassin-01", type: "crampons-cassin", label: "Mačky - Cassin 10 - uni" },
+  { id: "crampons-cassin-02", type: "crampons-cassin", label: "Mačky - Cassin 11 - uni" },
+  { id: "crampons-cassin-03", type: "crampons-cassin", label: "Mačky - Cassin 12 - uni" },
 
   { id: "crampons-frame-petzl", type: "crampons-frame", label: "Mačky - Petzl" },
   { id: "crampons-frame-camp", type: "crampons-frame", label: "Mačky - Camp" },
