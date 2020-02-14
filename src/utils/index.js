@@ -4,7 +4,7 @@ import SmtpService from "../SmtpService";
 
 export function sendRentInfo(mailTo, totalPrice, VS, otherNames) {
   const sender = new SmtpService();
-  const mailText = `Ahoj, 
+  const mailText = `Ahoj,
   prosím, uhraď ${totalPrice} Kč za zapůjčení věcí z oddílového skladu (${otherNames}). Díky.
   Platební údaje:
   Č.ú.: 2801236055;
@@ -65,8 +65,8 @@ export function switchName(itemName) {
       return itemName.replace("ice-axes-BD-turistic", "Cepín Turistický BD");
     case itemName.includes("ice-axes-Grivel-turistic"):
       return itemName.replace("ice-axes-Grivel-turistic", "Cepín Turistický Grivel");
- 
-    
+
+
     case itemName.includes("crampons-semi-01"):
       return itemName.replace("crampons-semi-01", "Mačky RE - poloautomaty 01");
     case itemName.includes("crampons-semi-02"):
@@ -77,16 +77,16 @@ export function switchName(itemName) {
     case itemName.includes("crampons-uni-01"):
       return itemName.replace("crampons-uni-01", "Mačky RE - uni 13");
     case itemName.includes("crampons-uni-02"):
-      return itemName.replace("crampons-uni-02", "Mačky RE - uni 03");    
+      return itemName.replace("crampons-uni-02", "Mačky RE - uni 03");
     case itemName.includes("crampons-uni-03"):
-      return itemName.replace("crampons-uni-03", "Mačky RE - uni 07");    
+      return itemName.replace("crampons-uni-03", "Mačky RE - uni 07");
     case itemName.includes("crampons-uni-04"):
-      return itemName.replace("crampons-uni-04", "Mačky RE - uni 08");    
+      return itemName.replace("crampons-uni-04", "Mačky RE - uni 08");
     case itemName.includes("crampons-uni-05"):
       return itemName.replace("crampons-uni-05", "Mačky RE - uni 06");
 
 
-    case itemName.includes("crampons-petzl"): 
+    case itemName.includes("crampons-petzl"):
       return itemName.replace("crampons-petzl", "Mačky Petzl Plaut");
 
     case itemName.includes("crampons-cassin-01"):
@@ -94,7 +94,7 @@ export function switchName(itemName) {
     case itemName.includes("crampons-cassin-02"):
       return itemName.replace("crampons-cassin-02", "Mačky Cassin 11");
     case itemName.includes("crampons-cassin-03"):
-      return itemName.replace("crampons-cassin-03", "Mačky Cassin 12");     
+      return itemName.replace("crampons-cassin-03", "Mačky Cassin 12");
 
     case itemName.includes("crampons-frame"):
       return itemName.replace("crampons-frame", "Mačky automat/rámovky");
@@ -130,5 +130,5 @@ export function useFetch(url) {
 }
 
 export function isAdmin(user) {
-  return user.uid === process.env.REACT_APP_ADMIN_KEY_1 || user.uid === process.env.REACT_APP_ADMIN_KEY_2;
+  return user.uid === process.env.REACT_APP_ADMIN_KEY_1 || user.uid === process.env.REACT_APP_ADMIN_KEY_2 || user.uid === process.env.REACT_APP_ADMIN_KEY_3;
 }
