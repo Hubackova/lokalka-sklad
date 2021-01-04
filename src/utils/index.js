@@ -44,28 +44,33 @@ export function switchName(itemName) {
       return itemName.replace("ice-axes-ergo", "Cepín - Petzl Ergo");
     case itemName.includes("ice-axes-gladiator-01"):
       return itemName.replace("ice-axes-gladiator-01", "Cepín Gladiator G1");
-      case itemName.includes("ice-axes-gladiator-02"):
-        return itemName.replace("ice-axes-gladiator-02", "Cepín Gladiator G2");
+    case itemName.includes("ice-axes-gladiator-02"):
+      return itemName.replace("ice-axes-gladiator-02", "Cepín Gladiator G2");
 
-      //u demon a super cup trochu komplikovane cislovani, takze to musi byt takto
-      case itemName.includes("ice-axes-supercup-01"):
-        return itemName.replace("ice-axes-supercup-01", "Cepín Demon R3");
-      case itemName.includes("ice-axes-supercup-02"):
-        return itemName.replace("ice-axes-supercup-02", "Cepín Demon R4");
-      case itemName.includes("ice-axes-supercup-03"):
-        return itemName.replace("ice-axes-supercup-03", "Cepín Super Cup R1");
+    //u demon a super cup trochu komplikovane cislovani, takze to musi byt takto
+    case itemName.includes("ice-axes-supercup-01"):
+      return itemName.replace("ice-axes-supercup-01", "Cepín Demon R3");
+    case itemName.includes("ice-axes-supercup-02"):
+      return itemName.replace("ice-axes-supercup-02", "Cepín Demon R4");
+    case itemName.includes("ice-axes-supercup-03"):
+      return itemName.replace("ice-axes-supercup-03", "Cepín Super Cup R1");
     case itemName.includes("ice-axes-supercup-04"):
       return itemName.replace("ice-axes-supercup-04", "Cepín Super Cup R2");
 
     case itemName.includes("ice-axes-RE-turistic"):
       return itemName.replace("ice-axes-RE-turistic", "Cepín Turistický RE ");
     case itemName.includes("ice-axes-Raveltic-turistic"):
-      return itemName.replace("ice-axes-Raveltic-turistic", "Cepín Turistický Raveltik");
+      return itemName.replace(
+        "ice-axes-Raveltic-turistic",
+        "Cepín Turistický Raveltik"
+      );
     case itemName.includes("ice-axes-BD-turistic"):
       return itemName.replace("ice-axes-BD-turistic", "Cepín Turistický BD");
     case itemName.includes("ice-axes-Grivel-turistic"):
-      return itemName.replace("ice-axes-Grivel-turistic", "Cepín Turistický Grivel");
-
+      return itemName.replace(
+        "ice-axes-Grivel-turistic",
+        "Cepín Turistický Grivel"
+      );
 
     case itemName.includes("crampons-semi-01"):
       return itemName.replace("crampons-semi-01", "Mačky RE - poloautomaty 01");
@@ -84,7 +89,6 @@ export function switchName(itemName) {
       return itemName.replace("crampons-uni-04", "Mačky RE - uni 08");
     case itemName.includes("crampons-uni-05"):
       return itemName.replace("crampons-uni-05", "Mačky RE - uni 06");
-
 
     case itemName.includes("crampons-petzl"):
       return itemName.replace("crampons-petzl", "Mačky Petzl Plaut");
@@ -130,5 +134,14 @@ export function useFetch(url) {
 }
 
 export function isAdmin(user) {
-  return user.uid === process.env.REACT_APP_ADMIN_KEY_1 || user.uid === process.env.REACT_APP_ADMIN_KEY_2 || user.uid === process.env.REACT_APP_ADMIN_KEY_3;
+  if (
+    document.location.hostname === "localhost" &&
+    user.email === "hubackova.lenka@gmail.com"
+  )
+    return true;
+  return (
+    user.uid === process.env.REACT_APP_ADMIN_KEY_1 ||
+    user.uid === process.env.REACT_APP_ADMIN_KEY_2 ||
+    user.uid === process.env.REACT_APP_ADMIN_KEY_3
+  );
 }

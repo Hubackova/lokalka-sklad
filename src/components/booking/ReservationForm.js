@@ -3,7 +3,7 @@ import moment from "moment";
 import ItemCalendar from "./ItemCalendar";
 import RentSummary from "./RentSummary";
 import { reservationsFb } from "../../firebase/firebase";
-import { isAdmin as adminFunction} from "../../utils";
+import { isAdmin as adminFunction } from "../../utils";
 import { itemList, itemTypes } from "../../data/items";
 import { UserContext } from "../../Contexts";
 import "./ReservationForm.scss";
@@ -17,33 +17,45 @@ const ReservationForm = ({
   reservations,
   handleDateChange,
   checkDisableDates,
-  initializeState
+  initializeState,
 }) => {
   const { isAuth, user } = useContext(UserContext);
-  const isAdmin = adminFunction(user)
+  const isAdmin = adminFunction(user);
   const [userSetup, setUserSetup] = useState({ phone: "", email: "" });
   const [reservationSetup, setReservationSetup] = useState({
     rent: isAdmin,
-    payed: false
+    payed: false,
+    free: false,
   });
 
   useEffect(() => {
-    setUserSetup({ phone: isAdmin ? "" : user.phone, email: isAdmin ? "" : user.email });
+    setUserSetup({
+      phone: isAdmin ? "" : user.phone,
+      email: isAdmin ? "" : user.email,
+    });
     setReservationSetup({ ...reservationSetup, rent: isAdmin });
   }, [user.uid, isAdmin]);
 
   const daysNum = date[0] ? moment(date[1]).diff(date[0], "days") || 1 : 0;
   const formattedDate = {
     from: moment(date[0]).format("YYYY-MM-DD"),
-    to: moment(date[1]).format("YYYY-MM-DD")
+    to: moment(date[1]).format("YYYY-MM-DD"),
   };
   const reservationDate = moment(new Date()).format("YYYY-MM-DD");
-  const VS = userSetup.phone && userSetup.phone.replace(/\s/g, "").slice(-6) + moment(new Date()).format("MMDD");
+  const VS =
+    userSetup.phone &&
+    userSetup.phone.replace(/\s/g, "").slice(-6) +
+      moment(new Date()).format("MMDD");
 
   function getPrice(i, daysNum) {
-    const item = itemList.find(j => j.id === i);
-    const itemType = itemTypes.find(type => type.type === item.type);
-    const price = daysNum === 1 ? itemType.price1 : daysNum < 5 ? itemType.price2 : itemType.price3;
+    const item = itemList.find((j) => j.id === i);
+    const itemType = itemTypes.find((type) => type.type === item.type);
+    const price =
+      daysNum === 1
+        ? itemType.price1
+        : daysNum < 5
+        ? itemType.price2
+        : itemType.price3;
     return price;
   }
 
@@ -62,17 +74,17 @@ const ReservationForm = ({
         reservationDate,
         notification: false,
         returned: false,
-        VS
+        VS,
       };
     });
     initializeState();
-    addingItems.forEach(element => reservationsFb.push(element));
+    addingItems.forEach((element) => reservationsFb.push(element));
   }
 
   const hasItems = itemNames.length > 0;
-  const disabledDates = itemNames.map(i => {
-    const items = reservations.filter(j => j.itemName === i);
-    return items ? items.map(i => i.date) : [];
+  const disabledDates = itemNames.map((i) => {
+    const items = reservations.filter((j) => j.itemName === i);
+    return items ? items.map((i) => i.date) : [];
   });
 
   return (
@@ -89,10 +101,17 @@ const ReservationForm = ({
       )}
       {hasItems && isAuth && (
         <div className="reservation-submit-panel">
-          <Button color="green" icon="plus"
+          <Button
+            color="green"
+            icon="plus"
             onClick={addReservation}
             className="reserve-button"
-            disabled={!daysNum || invalid || !userSetup.phone || userSetup.phone.replace(/\s/g, "").length < 9}
+            disabled={
+              !daysNum ||
+              invalid ||
+              !userSetup.phone ||
+              userSetup.phone.replace(/\s/g, "").length < 9
+            }
           >
             Rezervovat
           </Button>
@@ -100,7 +119,9 @@ const ReservationForm = ({
             <div>
               <label>Tel. číslo:</label>
               <Input
-                handleChange={e => setUserSetup({ ...userSetup, phone: e.target.value })}
+                handleChange={(e) =>
+                  setUserSetup({ ...userSetup, phone: e.target.value })
+                }
                 value={userSetup.phone}
                 label=""
                 placeholder=" zadej tel. číslo"
@@ -117,9 +138,26 @@ const ReservationForm = ({
                   name="payed"
                   type="checkbox"
                   onChange={() =>
-                    setReservationSetup({ ...reservationSetup, payed: !reservationSetup.payed })
+                    setReservationSetup({
+                      ...reservationSetup,
+                      payed: !reservationSetup.payed,
+                    })
                   }
                   checked={reservationSetup.payed}
+                />
+              </div>
+              <div>
+                <label>Zdarma (horoškola):</label>
+                <input
+                  name="free"
+                  type="checkbox"
+                  onChange={() =>
+                    setReservationSetup({
+                      ...reservationSetup,
+                      free: !reservationSetup.free,
+                    })
+                  }
+                  checked={reservationSetup.free}
                 />
               </div>
               <div>
@@ -128,7 +166,10 @@ const ReservationForm = ({
                   name="rent"
                   type="checkbox"
                   onChange={() =>
-                    setReservationSetup({ ...reservationSetup, rent: !reservationSetup.rent })
+                    setReservationSetup({
+                      ...reservationSetup,
+                      rent: !reservationSetup.rent,
+                    })
                   }
                   checked={reservationSetup.rent}
                 />
@@ -136,8 +177,11 @@ const ReservationForm = ({
               <div>
                 <label>Email:</label>
                 <Input
-                  handleChange={e =>
-                    setUserSetup({ ...userSetup, email: e.target.value.replace(/\s/g, "") })
+                  handleChange={(e) =>
+                    setUserSetup({
+                      ...userSetup,
+                      email: e.target.value.replace(/\s/g, ""),
+                    })
                   }
                   value={userSetup.email}
                   label=""
@@ -151,8 +195,11 @@ const ReservationForm = ({
                 <label>Tel. číslo:</label>
                 {/* TODO: pokud admin - zkusit doplnit tel. číslo po zadání emailu */}
                 <Input
-                  handleChange={e =>
-                    setUserSetup({ ...userSetup, phone: e.target.value.replace(/\s/g, "") })
+                  handleChange={(e) =>
+                    setUserSetup({
+                      ...userSetup,
+                      phone: e.target.value.replace(/\s/g, ""),
+                    })
                   }
                   value={userSetup.phone}
                   label=""
