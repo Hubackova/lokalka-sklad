@@ -51,7 +51,9 @@ const ReservationForm = ({
     const item = itemList.find((j) => j.id === i);
     const itemType = itemTypes.find((type) => type.type === item.type);
     const price =
-      daysNum === 1
+      itemType.type === "drytoolboots"
+        ? itemType.price1 * daysNum
+        : daysNum === 1
         ? itemType.price1
         : daysNum < 5
         ? itemType.price2
