@@ -108,9 +108,9 @@ export function switchName(itemName) {
       return itemName.replace("probe", "Sonda");
     case itemName.includes("beacon"):
       return itemName.replace("beacon", "Vyhledávač");
-    case itemName.includes("drytool-shoes"):
+    case itemName.includes("drytoolboots-39"):
       return itemName.replace(
-        "drytool-shoes",
+        "drytoolboots-39",
         "Drytool boty Triop Capoeira 39"
       );
     default:
