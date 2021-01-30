@@ -240,10 +240,10 @@ function App({ reservations, title, isAdmin }) {
           Cell: ({ row: { original } }) => {
             const daysToReturn = getDaysToReturn(original.date.to);
             isAdmin && console.log(original, daysToReturn);
-            const totalDays =
+            /* const totalDays =
               daysToReturn >= 0
                 ? original.daysNum
-                : daysToReturn * -1 + original.daysNum;
+                : daysToReturn * -1 + original.daysNum; */
 
             // TODO: vratit zpatky pocitani ceny pote, co se hudy normalne otevre
             return <span>{`${original.price} ,-`}</span>;
