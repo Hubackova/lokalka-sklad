@@ -239,15 +239,19 @@ function App({ reservations, title, isAdmin }) {
           Header: "Cena",
           Cell: ({ row: { original } }) => {
             const daysToReturn = getDaysToReturn(original.date.to);
+            isAdmin && console.log(original, daysToReturn);
             const totalDays =
               daysToReturn >= 0
                 ? original.daysNum
                 : daysToReturn * -1 + original.daysNum;
-            return getDaysToReturn(original.date.to) >= 0 ? (
+
+            // TODO: vratit zpatky pocitani ceny pote, co se hudy normalne otevre
+            return <span>{`${original.price} ,-`}</span>;
+            /*             return getDaysToReturn(original.date.to) >= 0 ? (
               `${original.price},-`
             ) : (
               <span>{`${getPrice(original, totalDays)} ,-`}</span>
-            );
+            ); */
           },
         },
         {
