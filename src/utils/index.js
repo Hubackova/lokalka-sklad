@@ -60,17 +60,9 @@ export function switchName(itemName) {
     case itemName.includes("ice-axes-RE-turistic"):
       return itemName.replace("ice-axes-RE-turistic", "Cepín Turistický RE ");
     case itemName.includes("ice-axes-Raveltic-turistic"):
-      return itemName.replace(
-        "ice-axes-Raveltic-turistic",
-        "Cepín Turistický Raveltik"
-      );
+      return itemName.replace("ice-axes-Raveltic-turistic", "Cepín Turistický Raveltik");
     case itemName.includes("ice-axes-BD-turistic"):
       return itemName.replace("ice-axes-BD-turistic", "Cepín Turistický BD");
-    case itemName.includes("ice-axes-Grivel-turistic"):
-      return itemName.replace(
-        "ice-axes-Grivel-turistic",
-        "Cepín Turistický Grivel"
-      );
 
     case itemName.includes("crampons-semi-01"):
       return itemName.replace("crampons-semi-01", "Mačky RE - poloautomaty 01");
@@ -109,10 +101,7 @@ export function switchName(itemName) {
     case itemName.includes("beacon"):
       return itemName.replace("beacon", "Vyhledávač");
     case itemName.includes("drytoolboots-39"):
-      return itemName.replace(
-        "drytoolboots-39",
-        "Drytool boty Triop Capoeira 39"
-      );
+      return itemName.replace("drytoolboots-39", "Drytool boty Triop Capoeira 39");
     default:
       return "";
   }
@@ -139,10 +128,7 @@ export function useFetch(url) {
 }
 
 export function isAdmin(user) {
-  if (
-    document.location.hostname === "localhost" &&
-    user.email === "hubackova.lenka@gmail.com"
-  )
+  if (document.location.hostname === "localhost" && user.email === "hubackova.lenka@gmail.com")
     return true;
   return (
     user.uid === process.env.REACT_APP_ADMIN_KEY_1 ||

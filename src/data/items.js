@@ -45,30 +45,23 @@ export const itemTypes = [
   {
     type: "ice-axes-RE-turistic",
     name: "Turistické cepíny RE",
-    price1: 50,
-    price2: 100,
-    price3: 200,
+    price1: 30,
+    price2: 60,
+    price3: 120,
   },
   {
     type: "ice-axes-Raveltic-turistic",
     name: "Turistické cepíny Raveltic",
-    price1: 50,
-    price2: 100,
-    price3: 200,
+    price1: 30,
+    price2: 60,
+    price3: 120,
   },
   {
     type: "ice-axes-BD-turistic",
     name: "Turistické cepíny BD",
-    price1: 50,
-    price2: 100,
-    price3: 200,
-  },
-  {
-    type: "ice-axes-Grivel-turistic",
-    name: "Turistické cepíny Grivel",
-    price1: 50,
-    price2: 100,
-    price3: 200,
+    price1: 30,
+    price2: 60,
+    price3: 120,
   },
 
   {
@@ -116,20 +109,7 @@ export const itemTypes = [
     price2: 100,
     price3: 200,
   },
-  {
-    type: "beacon-BCA",
-    name: "Vyhledávače BCA Tracker",
-    price1: 50,
-    price2: 100,
-    price3: 200,
-  },
-  {
-    type: "beacon-ortovox",
-    name: "Vyhledávač Ortovox F1",
-    price1: 50,
-    price2: 100,
-    price3: 200,
-  },
+  { type: "beacon-BCA", name: "Vyhledávače BCA Tracker", price1: 50, price2: 100, price3: 200 },
   {
     type: "drytoolboots",
     name: "Drytool boty Triop Capoeira 39",
@@ -159,36 +139,12 @@ export const itemList = [
     type: "ice-axes-bandit",
     label: "Cepín - Bandit 04 (K) - jen do ledu!",
   },
-  {
-    id: "ice-axes-bandit-05",
-    type: "ice-axes-bandit",
-    label: "Cepín - Bandit 05 (L)",
-  },
-  {
-    id: "ice-axes-bandit-06",
-    type: "ice-axes-bandit",
-    label: "Cepín - Bandit 06 (K)",
-  },
-  {
-    id: "ice-axes-bandit-07",
-    type: "ice-axes-bandit",
-    label: "Cepín - Bandit 07 (L)",
-  },
-  {
-    id: "ice-axes-bandit-08",
-    type: "ice-axes-bandit",
-    label: "Cepín - Bandit 08 (K)",
-  },
-  {
-    id: "ice-axes-bandit-09",
-    type: "ice-axes-bandit",
-    label: "Cepín - Bandit 09 (L)",
-  },
-  {
-    id: "ice-axes-bandit-10",
-    type: "ice-axes-bandit",
-    label: "Cepín - Bandit 10 (K)",
-  },
+  { id: "ice-axes-bandit-05", type: "ice-axes-bandit", label: "Cepín - Bandit 05 (L)" },
+  { id: "ice-axes-bandit-06", type: "ice-axes-bandit", label: "Cepín - Bandit 06 (K)" },
+  { id: "ice-axes-bandit-07", type: "ice-axes-bandit", label: "Cepín - Bandit 07 (L)" },
+  { id: "ice-axes-bandit-08", type: "ice-axes-bandit", label: "Cepín - Bandit 08 (K)" },
+  { id: "ice-axes-bandit-09", type: "ice-axes-bandit", label: "Cepín - Bandit 09 (L)" },
+  { id: "ice-axes-bandit-10", type: "ice-axes-bandit", label: "Cepín - Bandit 10 (K)" },
 
   {
     id: "ice-axes-ergo-01",
@@ -325,75 +281,31 @@ export const itemList = [
   },
   //TODO: v tech je trochu bordel
 
+  { id: "ice-axes-RE-turistic-01", type: "ice-axes-RE-turistic", label: "Turistický RE 01 60cm" },
+  { id: "ice-axes-RE-turistic-02", type: "ice-axes-RE-turistic", label: "Turistický RE 02 60cm" },
+  { id: "ice-axes-RE-turistic-03", type: "ice-axes-RE-turistic", label: "Turistický RE 03 60cm" },
+  { id: "ice-axes-RE-turistic-04", type: "ice-axes-RE-turistic", label: "Turistický RE 04 60cm" },
+  { id: "ice-axes-RE-turistic-05", type: "ice-axes-RE-turistic", label: "Turistický RE 05 60cm" },
+  { id: "ice-axes-RE-turistic-06", type: "ice-axes-RE-turistic", label: "Turistický RE 06 60cm" },
+  { id: "ice-axes-RE-turistic-07", type: "ice-axes-RE-turistic", label: "Turistický RE 07 60cm" },
+  { id: "ice-axes-RE-turistic-08", type: "ice-axes-RE-turistic", label: "Turistický RE 08 60cm" },
+  { id: "ice-axes-RE-turistic-09", type: "ice-axes-RE-turistic", label: "Turistický RE 09 55cm" },
+  { id: "ice-axes-RE-turistic-10", type: "ice-axes-RE-turistic", label: "Turistický RE 10 55cm" },
+  { id: "ice-axes-RE-turistic-11", type: "ice-axes-RE-turistic", label: "Turistický RE 11 65cm" },
   {
-    id: "ice-axes-RE-turistic-01",
-    type: "ice-axes-RE-turistic",
-    label: "Turistický RE 01 65cm",
-  },
-  {
-    id: "ice-axes-RE-turistic-02",
-    type: "ice-axes-RE-turistic",
-    label: "Turistický RE 02 55cm",
-  },
-  {
-    id: "ice-axes-RE-turistic-03",
-    type: "ice-axes-RE-turistic",
-    label: "Turistický RE 03 55cm",
-  },
-  {
-    id: "ice-axes-RE-turistic-04",
-    type: "ice-axes-RE-turistic",
-    label: "Turistický RE 04 60cm",
-  },
-  {
-    id: "ice-axes-RE-turistic-05",
-    type: "ice-axes-RE-turistic",
-    label: "Turistický RE 05 60cm",
-  },
-  {
-    id: "ice-axes-RE-turistic-06",
-    type: "ice-axes-RE-turistic",
-    label: "Turistický RE 06 60cm",
-  },
-  {
-    id: "ice-axes-RE-turistic-07",
-    type: "ice-axes-RE-turistic",
-    label: "Turistický RE 07 60cm",
-  },
-  {
-    id: "ice-axes-RE-turistic-08",
-    type: "ice-axes-RE-turistic",
-    label: "Turistický RE 08 60cm",
-  },
-  {
-    id: "ice-axes-RE-turistic-09",
-    type: "ice-axes-RE-turistic",
-    label: "Turistický RE 09 60cm",
-  },
-  {
-    id: "ice-axes-RE-turistic-10",
-    type: "ice-axes-RE-turistic",
-    label: "Turistický RE 10 60cm",
-  },
-  {
-    id: "ice-axes-RE-turistic-11",
-    type: "ice-axes-RE-turistic",
-    label: "Turistický RE 11 60cm",
-  },
-  {
-    id: "ice-axes-Raveltic-turistic-12",
-    type: "ice-axes-Raveltic-turistic",
-    label: "Turistický cepín Raveltik (12) 65cm",
-  },
-  {
-    id: "ice-axes-BD-turistic-13",
+    id: "ice-axes-BD-turistic-12",
     type: "ice-axes-BD-turistic",
-    label: "Turistický cepín BD (13) 65cm",
+    label: "Turistický cepín BD 12 65cm",
   },
   {
-    id: "ice-axes-Grivel-turistic-14",
-    type: "ice-axes-Grivel-turistic",
-    label: "Turistický cepín Grivel (14)",
+    id: "ice-axes-Raveltic-turistic-13",
+    type: "ice-axes-Raveltic-turistic",
+    label: "Turistický cepín Raveltik 13 65cm",
+  },
+  {
+    id: "ice-axes-Raveltic-turistic-14",
+    type: "ice-axes-Raveltic-turistic",
+    label: "Turistický cepín Raveltik 4 50cm",
   },
 
   {
@@ -401,11 +313,7 @@ export const itemList = [
     type: "crampons-semi",
     label: "Mačky - RE - poloautomaty 01 - jen do ledu!",
   },
-  {
-    id: "crampons-semi-02",
-    type: "crampons-semi",
-    label: "Mačky - RE - poloautomaty 09",
-  },
+  { id: "crampons-semi-02", type: "crampons-semi", label: "Mačky - RE - poloautomaty 09" },
   {
     id: "crampons-semi-03",
     type: "crampons-semi",
@@ -426,32 +334,12 @@ export const itemList = [
   { id: "crampons-uni-04", type: "crampons-uni", label: "Mačky - RE - uni 08" },
   { id: "crampons-uni-05", type: "crampons-uni", label: "Mačky - RE - uni 06" },
 
-  {
-    id: "crampons-petzl",
-    type: "crampons-petzl",
-    label: "Mačky - Petzl Plaut",
-  },
-  {
-    id: "crampons-cassin-01",
-    type: "crampons-cassin",
-    label: "Mačky - Cassin 10 - uni",
-  },
-  {
-    id: "crampons-cassin-02",
-    type: "crampons-cassin",
-    label: "Mačky - Cassin 11 - uni",
-  },
-  {
-    id: "crampons-cassin-03",
-    type: "crampons-cassin",
-    label: "Mačky - Cassin 12 - uni",
-  },
+  { id: "crampons-petzl", type: "crampons-petzl", label: "Mačky - Petzl Plaut" },
+  { id: "crampons-cassin-01", type: "crampons-cassin", label: "Mačky - Cassin 10 - uni" },
+  { id: "crampons-cassin-02", type: "crampons-cassin", label: "Mačky - Cassin 11 - uni" },
+  { id: "crampons-cassin-03", type: "crampons-cassin", label: "Mačky - Cassin 12 - uni" },
 
-  {
-    id: "crampons-frame-petzl",
-    type: "crampons-frame",
-    label: "Mačky - Petzl",
-  },
+  { id: "crampons-frame-petzl", type: "crampons-frame", label: "Mačky - Petzl" },
   { id: "crampons-frame-camp", type: "crampons-frame", label: "Mačky - Camp" },
   {
     id: "crampons-frame-raveltik-01",
@@ -517,15 +405,6 @@ export const itemList = [
   { id: "beacon-BCA-01", type: "beacon-BCA", label: "BCA Tracker 01" },
   { id: "beacon-BCA-02", type: "beacon-BCA", label: "BCA Tracker 02" },
   { id: "beacon-BCA-03", type: "beacon-BCA", label: "BCA Tracker 03" },
-  {
-    id: "beacon-ortovox-09",
-    type: "beacon-ortovox",
-    label: "Vyhledávač Ortovox F1 09",
-  },
-  {
-    id: "drytoolboots-39",
-    type: "drytoolboots",
-    label: "Drytool boty Triop Capoeira 39",
-  },
+  { id: "drytoolboots-39", type: "drytoolboots", label: "Drytool boty Triop Capoeira 39" },
   { id: "drill", type: "drill", label: "Vrtačka" },
 ];
