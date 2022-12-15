@@ -109,7 +109,6 @@ export const itemTypes = [
     price2: 100,
     price3: 200,
   },
-  { type: "beacon-BCA", name: "Vyhledávače BCA Tracker", price1: 50, price2: 100, price3: 200 },
   {
     type: "drytoolboots",
     name: "Drytool boty Triop Capoeira 39",
@@ -402,9 +401,6 @@ export const itemList = [
     type: "beacon-mammut",
     label: "Mammut Barryvox 08",
   },
-  { id: "beacon-BCA-01", type: "beacon-BCA", label: "BCA Tracker 01" },
-  { id: "beacon-BCA-02", type: "beacon-BCA", label: "BCA Tracker 02" },
-  { id: "beacon-BCA-03", type: "beacon-BCA", label: "BCA Tracker 03" },
   { id: "drytoolboots-39", type: "drytoolboots", label: "Drytool boty Triop Capoeira 39" },
   { id: "drill", type: "drill", label: "Vrtačka" },
 ];
