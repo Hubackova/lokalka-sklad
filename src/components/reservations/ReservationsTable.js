@@ -109,9 +109,15 @@ function App({ reservations, title, isAdmin }) {
         ? itemType.price1 * daysNum
         : daysNum === 1
         ? itemType.price1
-        : daysNum < 5
+        : daysNum < 4
         ? itemType.price2
-        : itemType.price3;
+        : daysNum < 7
+        ? itemType.price3
+        : daysNum < 10
+        ? itemType.price4
+        : daysNum < 13
+        ? itemType.price5
+        : itemType.price6;
     return price;
   };
 
