@@ -144,7 +144,7 @@ export const itemTypes = [
   },
   {
     type: "drytoolboots",
-    name: "Drytool boty Triop Capoeira 39",
+    name: "Drytool boty",
     price1: 70,
   },
   // { type: "drill", name: "Vrtačka", price1: 50, price2: 100, price3: 200  },
