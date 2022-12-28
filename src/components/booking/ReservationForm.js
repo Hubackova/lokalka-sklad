@@ -44,8 +44,11 @@ const ReservationForm = ({
   const reservationDate = moment(new Date()).format("YYYY-MM-DD");
   const VS =
     userSetup.phone &&
-    userSetup.phone.replace(/\s/g, "").slice(-6) +
-      moment(new Date()).format("MMDD");
+    parseInt(
+      userSetup.phone.replace(/\s/g, "").slice(-6) +
+        moment(new Date()).format("MMDD"),
+      10
+    );
 
   function getPrice(i, daysNum) {
     const item = itemList.find((j) => j.id === i);
