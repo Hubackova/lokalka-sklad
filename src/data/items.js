@@ -31,7 +31,7 @@ export const itemTypes = [
     price6: 120,
   },
   {
-    type: "ice-axes-RE-turistic",
+    type: "ice-axes-turistic",
     name: "Turistické cepíny RE",
     price1: 20,
     price2: 40,
@@ -40,27 +40,6 @@ export const itemTypes = [
     price5: 100,
     price6: 120,
   },
-  {
-    type: "ice-axes-Raveltic-turistic",
-    name: "Turistické cepíny Raveltic",
-    price1: 20,
-    price2: 40,
-    price3: 60,
-    price4: 80,
-    price5: 100,
-    price6: 120,
-  },
-  {
-    type: "ice-axes-BD-turistic",
-    name: "Turistické cepíny BD",
-    price1: 20,
-    price2: 40,
-    price3: 60,
-    price4: 80,
-    price5: 100,
-    price6: 120,
-  },
-
   {
     type: "crampons-semi",
     name: "Mačky RE - poloautomaty",
@@ -247,72 +226,72 @@ export const itemList = [
 
   {
     id: "ice-axes-RE-turistic-01",
-    type: "ice-axes-RE-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický RE 01 60cm",
   },
   {
     id: "ice-axes-RE-turistic-02",
-    type: "ice-axes-RE-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický RE 02 60cm",
   },
   {
     id: "ice-axes-RE-turistic-03",
-    type: "ice-axes-RE-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický RE 03 60cm",
   },
   {
     id: "ice-axes-RE-turistic-04",
-    type: "ice-axes-RE-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický RE 04 60cm",
   },
   {
     id: "ice-axes-RE-turistic-05",
-    type: "ice-axes-RE-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický RE 05 60cm",
   },
   {
     id: "ice-axes-RE-turistic-06",
-    type: "ice-axes-RE-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický RE 06 60cm",
   },
   {
     id: "ice-axes-RE-turistic-07",
-    type: "ice-axes-RE-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický RE 07 60cm",
   },
   {
     id: "ice-axes-RE-turistic-08",
-    type: "ice-axes-RE-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický RE 08 60cm",
   },
   {
     id: "ice-axes-RE-turistic-09",
-    type: "ice-axes-RE-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický RE 09 55cm",
   },
   {
     id: "ice-axes-RE-turistic-10",
-    type: "ice-axes-RE-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický RE 10 55cm",
   },
   {
     id: "ice-axes-RE-turistic-11",
-    type: "ice-axes-RE-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický RE 11 65cm",
   },
   {
     id: "ice-axes-BD-turistic-12",
-    type: "ice-axes-BD-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický cepín BD 12 65cm",
   },
   {
     id: "ice-axes-Raveltic-turistic-13",
-    type: "ice-axes-Raveltic-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický cepín Raveltik 13 65cm",
   },
   {
     id: "ice-axes-Raveltic-turistic-14",
-    type: "ice-axes-Raveltic-turistic",
+    type: "ice-axes-turistic",
     label: "Turistický cepín Raveltik 14 50cm",
   },
 
