@@ -32,7 +32,7 @@ export const itemTypes = [
   },
   {
     type: "ice-axes-turistic",
-    name: "Turistické cepíny RE",
+    name: "Turistické cepíny",
     price1: 20,
     price2: 40,
     price3: 60,
