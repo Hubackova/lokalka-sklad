@@ -125,6 +125,7 @@ const ReservationForm = ({
             disabled={
               !daysNum ||
               invalid ||
+              !userSetup.name ||
               !userSetup.phone ||
               userSetup.phone.replace(/\s/g, "").length < 9
             }
