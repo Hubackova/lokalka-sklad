@@ -21,7 +21,11 @@ const ReservationForm = ({
 }) => {
   const { isAuth, user } = useContext(UserContext);
   const isAdmin = adminFunction(user);
-  const [userSetup, setUserSetup] = useState({ phone: "", email: "" });
+  const [userSetup, setUserSetup] = useState({
+    phone: "",
+    email: "",
+    name: "",
+  });
   const [reservationSetup, setReservationSetup] = useState({
     rent: isAdmin,
     payed: false,
@@ -32,6 +36,7 @@ const ReservationForm = ({
     setUserSetup({
       phone: isAdmin ? "" : user.phone,
       email: isAdmin ? "" : user.email,
+      name: isAdmin ? "" : user.name,
     });
     setReservationSetup({ ...reservationSetup, rent: isAdmin });
   }, [user.uid, isAdmin]);
@@ -200,6 +205,22 @@ const ReservationForm = ({
                   type="email"
                   required={true}
                   style={{ width: 220 }}
+                />
+              </div>
+              <div>
+                <label>Jméno:</label>
+                <Input
+                  handleChange={(e) =>
+                    setUserSetup({
+                      ...userSetup,
+                      name: e.target.value.replace(/\s/g, ""),
+                    })
+                  }
+                  value={userSetup.name}
+                  label=""
+                  placeholder="jméno + příjmení toho, kdo si věc půjčuje"
+                  required={true}
+                  style={{ width: 300 }}
                 />
               </div>
               <div>

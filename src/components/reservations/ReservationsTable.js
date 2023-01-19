@@ -215,6 +215,13 @@ function App({ reservations, title, isAdmin }) {
           ),
         },
         {
+          show: isAdmin,
+          Header: "Jméno",
+          Cell: ({ row: { original } }) => (
+            <span title={original.email}>{original.name || "-"}</span>
+          ),
+        },
+        {
           Header: "Položka",
           Cell: ({ row: { original } }) => (
             <div className="table-itemName">
