@@ -63,7 +63,9 @@ const SignInForm = ({ setRegistrationModal }) => {
             color="green"
             type="submit"
             icon="plus"
-            disabled={!phone || !(parseMin(phone) && parseMin(phone).isValid())}
+            disabled={
+              !name || !phone || !(parseMin(phone) && parseMin(phone).isValid())
+            }
             title={
               !(parseMin(phone) && parseMin(phone).isValid()) &&
               "zadej číslo v požadovaném formátu"
