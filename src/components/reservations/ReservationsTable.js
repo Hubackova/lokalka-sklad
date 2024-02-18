@@ -216,6 +216,13 @@ function App({ reservations, title, isAdmin }) {
         },
         {
           show: isAdmin,
+          Header: "Email",
+          Cell: ({ row: { original } }) => (
+            <span>{original.email}</span>
+          ),
+        },
+        {
+          show: isAdmin,
           Header: "Jméno",
           Cell: ({ row: { original } }) => (
             <span title={original.email}>{original.name || "-"}</span>
