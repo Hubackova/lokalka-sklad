@@ -214,7 +214,7 @@ const ReservationForm = ({
                   handleChange={(e) =>
                     setUserSetup({
                       ...userSetup,
-                      name: e.target.value.replace(/\s/g, ""),
+                      name: e.target.value,
                     })
                   }
                   value={userSetup.name}
