@@ -121,11 +121,6 @@ export const itemTypes = [
     price5: 350,
     price6: 420,
   },
-  {
-    type: "drytoolboots",
-    name: "Drytool boty",
-    price1: 70,
-  },
   // { type: "drill", name: "Vrtačka", price1: 50, price2: 100, price3: 200  },
 ];
 
@@ -437,16 +432,6 @@ export const itemList = [
     id: "beacon-mammut-10",
     type: "beacon-mammut",
     label: "Mammut Barryvox 10",
-  },
-  {
-    id: "drytoolboots-39",
-    type: "drytoolboots",
-    label: "Drytool boty Triop Capoeira 39",
-  },
-  {
-    id: "drytoolboots-41",
-    type: "drytoolboots",
-    label: "Drytool boty Triop 41",
   },
   { id: "drill", type: "drill", label: "Vrtačka" },
 ];
